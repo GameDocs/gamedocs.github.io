@@ -1,6 +1,7 @@
 .TopBar {
 	background-color: #111;
-	position: fixed;
+	position: -webkit-sticky; /* safari */
+	position: sticky;
 	width: 100%;
 	left: 0;
 	top: 0;

@@ -8,7 +8,7 @@
 	width: 100%;
 }
 
-.DocsCard {
+.DocsCard, .DocsCardText {
 	background: #111;
 	padding: 10px;
 	border-radius: 0;
@@ -16,6 +16,10 @@
 	margin-left: 0;
 	border-radius: 0 10px 10px 0;
 	flex: 1;
+}
+
+.DocsCardText {
+	padding-left: 20px;
 }
 
 .SearchCard {
@@ -46,4 +50,183 @@
 	width: 100%;
 	min-width: 200px;
 	max-width: 400px;
+}
+
+.ClassSearchList {
+	background-color: #111111;
+	margin-left: 0;
+	padding-left: 0;
+
+	& li {
+		list-style: none;
+		padding-left: 30px;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	& li:hover {
+		background-color: #444;
+	}
+}
+
+/* Decl stuff */
+
+.DeclFunction {
+	font-size: 14px;
+
+	& p {
+		margin-top: 0;
+		margin-bottom: 7px;
+		font-size: 14px;
+	}
+
+	& .DeclParam {
+		font-size: 13px;
+	}
+}
+
+.DeclHeader {
+	margin-bottom: 10px;
+	padding: 3px 5px 5px 0;
+	overflow: hidden;
+}
+
+.Tabledata {
+	background-color: #115B8C;
+	border-top: 4px solid #409DDB;
+}
+
+.Userdata {
+	background-color: #232a31;
+	border-top: 4px solid #434853;
+}
+
+
+.DeclSeparator {
+	float: left;
+	margin-right: 5px;
+}
+
+.DeclParameters {
+	user-select: none;
+
+	&:before {
+		content: ' ( ';
+	}
+
+	&:after {
+		content: ' )';
+	}
+}
+
+.DeclSandbox {
+	font-size: 13px;
+	margin-left: 0.5em;
+	background-color: #0005;
+	font-style: italic;
+	color: #FFC26B;
+
+	&:not(:empty) {
+		padding: 1px 4px;
+	}
+}
+
+.DeclName {
+	font-size: 13px;
+}
+
+.DeclLink {
+	content: url('pragma.svg');
+	float: right;
+	margin-top: 4px;
+	height: 16px;
+	cursor: pointer;
+	opacity: 0.7;
+	transition: 0.2s;
+
+	&:hover {
+		opacity: 1;
+		transition: 0.2s;
+	}
+}
+
+.DeclParam {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8em;
+	color: #FFC26B;
+
+	&:not(:last-child):after {
+		content: ',';
+		color: white;
+		font-style: normal;
+		font-weight: normal;
+		margin-right: 0.2em;
+	}
+}
+
+.DeclParamTable {
+	font-weight: bold;
+	color: #3a899b;
+
+	& code:first-child:before {
+		content: '{';
+		margin-right: 0.2em;
+		font-size: 1.2em;
+		font-weight: bold;
+		font-style: italic;
+		color: #2eb9d9;
+	}
+
+	& code:last-child:after {
+		content: '}';
+		margin-left: 0.2em;
+		font-size: 1.2em;
+		font-weight: bold;
+		font-style: italic;
+		color: #2eb9d9;
+	}
+
+	&:not(:last-child):after {
+		content: ',';
+		color: white;
+		font-style: normal;
+		font-weight: normal;
+		margin-right: 0.2em;
+	}
+}
+
+.DeclDescription {
+	font-size: 16px;
+	margin-left: 0;
+
+	& a {
+		color: #a6a6a6;
+
+		&:hover {
+			color: #ccc;
+		}
+	}
+}
+
+.DeclTables {
+	& th {
+		float: left;
+	}
+
+	& ul {
+		margin-bottom: 10px;
+	}
+}
+
+.DeclDescriptionParams {
+	font-size: 0.8em;
+
+	& span {
+		font-size: 1.25em;
+	}
+
+	& span strong {
+		margin-right: 10px;
+	}
 }

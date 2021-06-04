@@ -1,12 +1,15 @@
 body {
 	background-color: #222;
-	margin-right: 10%;
-	margin-left: 10%;
-	padding: 10px;
 	color: #fff;
 }
 
 a {
 	color: #02e37a;
 	text-decoration: none;
+}
+
+.AppBody {
+	margin-right: 10%;
+	margin-left: 10%;
+	padding: 10px;
 }
