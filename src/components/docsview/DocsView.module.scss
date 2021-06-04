@@ -1,0 +1,49 @@
+.Horizontal {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.Vertical {
+	display: block;
+	width: 100%;
+}
+
+.DocsCard {
+	background: #111;
+	padding: 10px;
+	border-radius: 0;
+	margin: 5px;
+	margin-left: 0;
+	border-radius: 0 10px 10px 0;
+	flex: 1;
+}
+
+.SearchCard {
+	background: #191919;
+	padding: 10px;
+	border-radius: 10px 0 0 10px;
+	margin: 5px;
+	margin-right: 0;
+	flex: 1;
+	max-width: 200px;
+}
+
+.SearchBar {
+	width: 100%;
+	width: -moz-available;
+	width: -webkit-fill-available;
+	font-style: italic;
+	font-size: 0.9em;
+	background: #000;
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 2px;
+	margin-left: -2px;
+}
+
+.Logo {
+	width: 100%;
+	min-width: 200px;
+	max-width: 400px;
+}
