@@ -1,0 +1,113 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$comment": "SMDocs schema version 2",
+	"type": "object",
+	"$function": {
+		"type": "object",
+		"required": [
+			"name",
+			"args",
+			"params",
+			"returns"
+		],
+		"properties": {
+			"name": { "type": "string" },
+			"args": { "type": "integer" },
+			"sandbox": { "type": "string" },
+			"description": { "type": "string" },
+			"params": {
+				"type": "array",
+				"items": [
+					{
+						"type": "object",
+						"required": [ "type" ],
+						"properties": {
+							"type": {
+								"type": "array",
+								"contains": { "type": "string" }
+							},
+							"name": { "type": "string" },
+							"description": { "type": "string" }
+						}
+					}
+				]
+			},
+			"returns": {
+				"type": "array",
+				"items": [
+					{
+						"type": "object",
+						"required": [ "type" ],
+						"properties": {
+							"type": {
+								"type": "array",
+								"contains": { "type": "string" }
+							},
+							"description": { "type": "string" }
+						}
+					}
+				]
+			}
+		}
+	},
+	"required": [
+		"author",
+		"version",
+		"time",
+		"namespaces",
+		"schema"
+	],
+	"properties": {
+		"author": { "type": "string" },
+		"version": { "type": "string" },
+		"comment": { "type": "string" },
+		"time": { "type": "integer" },
+		"schema": { "type": "integer" },
+		"namespaces": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"name"
+				],
+				"properties": {
+					"name": { "type": "string" },
+					"constants": {
+						"type": "array",
+						"contains": {
+							"type": "object"
+						}
+					},
+					"tabledata": {
+						"type": "array",
+						"contains": {
+							"$ref": "#/$function"
+						}
+					},
+					"userdata": {
+						"type": "object",
+						"required": [
+							"typename",
+							"typeid",
+							"methods",
+							"fields"
+						],
+						"properties": {
+							"typename": { "type": "string" },
+							"typeid": { "type": "integer" },
+							"methods": {
+								"type": "array",
+								"contains": {
+									"$ref": "#/$function"
+								}
+							},
+							"fields": {
+								"type": "array",
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

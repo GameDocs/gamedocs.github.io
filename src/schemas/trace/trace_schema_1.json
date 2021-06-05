@@ -1,0 +1,101 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$comment": "SMDocs schema version 1",
+	"type": "object",
+	"$function": {
+		"type": "object",
+		"required": [
+			"args",
+			"params",
+			"returns"
+		],
+		"properties": {
+			"args": { "type": "integer" },
+			"sandbox": { "type": "string" },
+			"description": { "type": "string" },
+			"params": {
+				"type": "array",
+				"items": [
+					{
+						"type": "object",
+						"required": [ "type" ],
+						"properties": {
+							"type": {
+								"type": "array",
+								"contains": { "type": "string" }
+							},
+							"name": { "type": "string" },
+							"description": { "type": "string" }
+						}
+					}
+				]
+			},
+			"returns": {
+				"type": "array",
+				"items": [
+					{
+						"type": "object",
+						"required": [ "type" ],
+						"properties": {
+							"type": {
+								"type": "array",
+								"contains": { "type": "string" }
+							},
+							"description": { "type": "string" }
+						}
+					}
+				]
+			}
+		}
+	},
+	"required": [
+		"author",
+		"version",
+		"time",
+		"content"
+	],
+	"properties": {
+		"author": { "type": "string" },
+		"version": { "type": "string" },
+		"comment": { "type": "string" },
+		"time": { "type": "integer" },
+		"urls": {
+			"type": "object",
+			"patternProperties": {
+				"": { "type": "string" }
+			}
+		},
+		"content": {
+			"type": "object",
+			"patternProperties": {
+				"": {
+					"type": "object",
+					"required": [
+						"constants",
+						"tabledata",
+						"userdata"
+					],
+					"properties": {
+						"constants": { "type": "object" },
+						"tabledata": {
+							"type": "object",
+							"patternProperties": {
+								"": {
+									"$ref": "#/$function"
+								}
+							}
+						},
+						"userdata": {
+							"type": "object",
+							"patternProperties": {
+								"": {
+									"$ref": "#/$function"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -115,9 +115,6 @@ function DocsView(props) {
 					<p>Special thanks to TechnologicNick for helping me with documentation.<br/>
 						<a class="pagelink" href="https://github.com/TechnologicNick" target="blank">[GitHub TechnologicNick]</a>
 					</p>
-					<p>Owner GitHub:<br/>
-						<a class="pagelink" href="https://github.com/Kariaro" target="blank">[GitHub HardCoded]</a>
-					</p>
 				</div>
 			</div>
 			<div className={`${styles.Horizontal}`}>
