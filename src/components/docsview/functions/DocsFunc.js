@@ -56,7 +56,7 @@ function DeclParams(json) {
 		return (
 			<li className={`${styles.DeclDescriptionParams}`}>
 				<span><strong>{name}:</strong>{StringifyParam(param, false)}</span>
-				<span><ReactMarkdown linkTarget={MARKDOWN_LINK_TARGET}>{param.description}</ReactMarkdown></span>
+				<span className={`${styles.DeclParamDescription}`}><ReactMarkdown linkTarget={MARKDOWN_LINK_TARGET}>{param.description}</ReactMarkdown></span>
 			</li>
 		);
 	});

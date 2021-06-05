@@ -101,11 +101,49 @@ function filter_elements(filter, namespaceSearch = false) {
 
 function DocsView(props) {
 	const DocsContent = DocsJson.content;
-	
+	React.useEffect(() => {
+		{
+			let search_list = document.getElementById('class-search-list');
+			let search_elements = Array.prototype.slice.call(search_list.children, 0);
+			search_elements.sort((a, b) => {
+				let as = a.innerText;
+				let bs = b.innerText;
+				return as.localeCompare(bs);
+			});
+
+			/* Clear the elements to then feed the sorted elements back into the div */
+			search_list.innerHTML = '';
+			for(let i in search_elements) {
+				search_list.appendChild(search_elements[i]);
+			}
+		}
+		if(window.location.hash) {
+			let hash = window.location.hash.substring(1);
+			let namespace;
+			{
+				let idx = hash.lastIndexOf(':');
+				if(idx >= 0) {
+					namespace = hash.substring(0, idx);
+				} else {
+					idx = hash.lastIndexOf('.');
+					if(idx >= 0) {
+						namespace = hash.substring(0, idx);
+					} else {
+						namespace = hash;
+					}
+				}
+			}
+
+			filter_elements(namespace, true);
+			window.location.hash = '#';
+			window.location.hash = '#' + hash.toLowerCase();
+		}
+	});
+
 	return (
 		<div className={`${styles.Vertical}`}>
 			<div className={`${styles.Horizontal}`}>
-				<div className={`${styles.SearchCard}`}>
+				<div className={`${styles.DocsCardImage}`}>
 					<img className={`${styles.Logo}`} src={logo} alt="Logo"/>
 				</div>
 				<div className={`${styles.DocsCardText}`}>

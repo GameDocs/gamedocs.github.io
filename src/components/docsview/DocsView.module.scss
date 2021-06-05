@@ -16,13 +16,10 @@
 	margin-left: 0;
 	border-radius: 0 10px 10px 0;
 	flex: 1;
+	word-break: break-word;
 }
 
-.DocsCardText {
-	padding-left: 20px;
-}
-
-.SearchCard {
+.SearchCard, .DocsCardImage {
 	background: #191919;
 	padding: 10px;
 	border-radius: 10px 0 0 10px;
@@ -30,6 +27,12 @@
 	margin-right: 0;
 	flex: 1;
 	max-width: 200px;
+	min-width: 200px;
+}
+
+.DocsCardText {
+	padding-left: 20px;
+	word-break: break-word;
 }
 
 .SearchBar {
@@ -69,19 +72,81 @@
 	}
 }
 
+/* Phone css */
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+	body {
+		font-size: 10px;
+	}
+
+	.Horizontal {
+		display: block;
+		margin-bottom: 0;
+	}
+
+	.DocsCardImage, .SearchCard, .DocsCardText, .DocsCard {
+		border-radius: 10px;
+		margin: 0;
+		margin-top: 5px;
+	}
+
+	.DocsCardImage {
+		min-width: unset;
+		max-height: 200px;
+		height: 200px;
+		max-width: 100%;
+		text-align: center;
+
+		& img {
+			height: 200px;
+			width: 200px;
+			margin: auto;
+		}
+	}
+
+	.SearchCard {
+		min-width: unset;
+		max-width: 100%;
+		& ul {
+			overflow-y: scroll;
+			height: 200px;
+		}
+	}
+
+	.DeclFunction {
+		& dd {
+			margin-left: 20px;
+		}
+
+		& th {
+			word-break: normal;
+		}
+
+		& ul {
+			padding-left: 20px;
+		}
+	}
+
+	.DeclLink {
+		margin-top: 2px !important;
+		height: 10px !important;
+	}
+}
+
 /* Decl stuff */
-
 .DeclFunction {
-	font-size: 14px;
-
 	& p {
 		margin-top: 0;
 		margin-bottom: 7px;
-		font-size: 14px;
 	}
 
-	& .DeclParam {
-		font-size: 13px;
+	& th {
+		font-size: 0.9em;
+	}
+
+	& td {
+		padding-top: 0;
+		margin-top: 0;
 	}
 }
 
@@ -120,7 +185,6 @@
 }
 
 .DeclSandbox {
-	font-size: 13px;
 	margin-left: 0.5em;
 	background-color: #0005;
 	font-style: italic;
@@ -131,8 +195,8 @@
 	}
 }
 
-.DeclName {
-	font-size: 13px;
+.DeclName, .DeclSandbox {
+	font-size: 0.8em;
 }
 
 .DeclLink {
@@ -197,8 +261,8 @@
 }
 
 .DeclDescription {
-	font-size: 16px;
 	margin-left: 0;
+	font-size: 0.95em;
 
 	& a {
 		color: #a6a6a6;
@@ -207,6 +271,10 @@
 			color: #ccc;
 		}
 	}
+}
+
+.DeclParamDescription {
+	font-size: 1em !important;
 }
 
 .DeclTables {
@@ -228,5 +296,6 @@
 
 	& span strong {
 		margin-right: 10px;
+		font-size: 0.8em;
 	}
 }

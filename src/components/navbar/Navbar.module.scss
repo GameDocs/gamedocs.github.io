@@ -1,10 +1,22 @@
 .TopBar {
 	background-color: #111;
-	position: -webkit-sticky; /* safari */
+	position: -webkit-sticky; /* Safari */
 	position: sticky;
 	width: 100%;
 	left: 0;
 	top: 0;
 	z-index: 9999;
 	text-align: left;
+}
+
+/* Phone css */
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+	body {
+		margin-top: 49px;
+	}
+
+	.TopBar {
+		position: fixed;
+	}
 }

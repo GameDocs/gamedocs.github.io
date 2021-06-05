@@ -13,3 +13,11 @@ a {
 	margin-left: 10%;
 	padding: 10px;
 }
+
+/* Phone css */
+@media (max-width: 768px) {
+	.AppBody {
+		margin-right: 2%;
+		margin-left: 2%;	
+	}
+}

@@ -37,9 +37,6 @@
 						},
 						{
 							"type": [
-								"shape",
-								"character",
-								"harvestable",
 								"body"
 							],
 							"name": "body",
@@ -97,10 +94,7 @@
 					"params": [
 						{
 							"type": [
-								"userdata",
-								"body",
-								"character",
-								"shape"
+								"character"
 							],
 							"name": "target",
 							"description": "The character on which the impulse is exerted on."
@@ -134,7 +128,6 @@
 					"params": [
 						{
 							"type": [
-								"userdata",
 								"body"
 							],
 							"name": "target",
@@ -178,24 +171,21 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "destructionRadius",
 							"description": "The destruction radius. Objects inside this sphere may be destroyed."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "impulseRadius",
 							"description": "The impulse radius. Objects inside this sphere are affected by an impulse."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "magnitude",
 							"description": "The impulse strength of the explosion. The strength diminishes with distance."
@@ -230,8 +220,7 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "gravity",
 							"description": "The gravitational value."
@@ -483,8 +472,7 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
@@ -506,16 +494,14 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
@@ -580,16 +566,14 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
@@ -645,16 +629,14 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
@@ -690,16 +672,14 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "a",
 							"description": "The lower bound."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "b",
 							"description": "The upper bound."
@@ -721,16 +701,14 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "mean",
 							"description": "The mean."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "deviation",
 							"description": "The deviation."
@@ -759,8 +737,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "spreadAngle",
 							"description": "The spread angle in degrees."
@@ -788,24 +765,21 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "lower",
 							"description": "The lower limit."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "upper",
 							"description": "The upper limit."
@@ -827,24 +801,21 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x0",
 							"description": "The first value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x1",
 							"description": "The second value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "t",
 							"description": "The interpolation step."
@@ -866,32 +837,28 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c0",
 							"description": "The start value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c1",
 							"description": "The control point."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c2",
 							"description": "The end value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "t",
 							"description": "The interpolation step."
@@ -913,40 +880,35 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c0",
 							"description": "The start value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c1",
 							"description": "The first control point."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c2",
 							"description": "The second control point."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "c3",
 							"description": "The end value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "t",
 							"description": "The interpolation step."
@@ -997,24 +959,21 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "edge0",
 							"description": "The value of the lower edge of the Hermite function."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "edge1",
 							"description": "The value of the upper edge of the Hermite function."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The source value for interpolation."
@@ -1036,24 +995,21 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "edge0",
 							"description": "The value of the lower edge of the Hermite function."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "edge1",
 							"description": "The value of the upper edge of the Hermite function."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The source value for interpolation."
@@ -2268,9 +2224,7 @@
 					"params": [
 						{
 							"type": [
-								"table",
-								"string",
-								"number"
+								"int"
 							],
 							"name": "channel",
 							"description": "The channel number."
@@ -2294,9 +2248,7 @@
 					"params": [
 						{
 							"type": [
-								"table",
-								"string",
-								"number"
+								"int"
 							],
 							"name": "channel",
 							"description": "The channel number."
@@ -3139,8 +3091,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "time",
 							"description": "The completion time."
@@ -6391,8 +6342,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "signal",
 							"description": "The power output signal."
@@ -6696,8 +6646,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "value",
 							"description": "The pose weight."
@@ -6822,8 +6771,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "progress",
 							"description": "The animation's progress between 0 and 1."
@@ -8563,7 +8511,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8586,7 +8533,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8609,7 +8555,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8632,7 +8577,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8655,7 +8599,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8663,16 +8606,14 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "targetVelocity",
 							"description": "The target velocity."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "maxImpulse",
 							"description": "The max impulse."
@@ -8687,7 +8628,6 @@
 					"params": [
 						{
 							"type": [
-								"bearing",
 								"joint"
 							],
 							"name": "bearing",
@@ -8695,24 +8635,21 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "targetAngle",
 							"description": "The target angle."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "targetVelocity",
 							"description": "The target velocity."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "maxImpulse",
 							"description": "The max impulse."
@@ -8727,7 +8664,6 @@
 					"params": [
 						{
 							"type": [
-								"piston",
 								"joint"
 							],
 							"name": "piston",
@@ -8750,7 +8686,6 @@
 					"params": [
 						{
 							"type": [
-								"piston",
 								"joint"
 							],
 							"name": "bearing",
@@ -8758,24 +8693,21 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "targetLength",
 							"description": "The target length."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "targetVelocity",
 							"description": "The target velocity."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "maxImpulse",
 							"description": "The max impulse. (Defaults to impulse used in game)"
@@ -11039,8 +10971,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"character"
 							],
 							"name": "character",
 							"description": "The old character to inherit from (Optional)."
@@ -13675,24 +13606,21 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "z",
 							"description": "The Z value."
@@ -13771,8 +13699,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
@@ -13816,8 +13743,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
@@ -13861,8 +13787,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "z",
 							"description": "The Z value."
@@ -14015,8 +13940,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "t",
 							"description": "Interpolation amount between the two inputs."
@@ -14115,8 +14039,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "angle",
 							"description": "The angle."
@@ -14145,8 +14068,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "angle",
 							"description": "The angle."
@@ -14175,8 +14097,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "angle",
 							"description": "The angle."
@@ -14205,8 +14126,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "angle",
 							"description": "The angle."
@@ -14644,32 +14564,28 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "z",
 							"description": "The Z value."
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "w",
 							"description": "The W value."
@@ -14754,8 +14670,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "x",
 							"description": "The X value."
@@ -14799,8 +14714,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "y",
 							"description": "The Y value."
@@ -14844,8 +14758,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "z",
 							"description": "The Z value."
@@ -14889,8 +14802,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "w",
 							"description": "The W value."
@@ -14970,8 +14882,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "t",
 							"description": "Interpolation amount between the two inputs."
@@ -15190,9 +15101,7 @@
 					"params": [
 						{
 							"type": [
-								"integer",
-								"string",
-								"number"
+								"int"
 							],
 							"name": "hexInt",
 							"description": "The hex value."
@@ -15330,8 +15239,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "r",
 							"description": "The red value."
@@ -15353,8 +15261,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "g",
 							"description": "The green value."
@@ -15376,8 +15283,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "b",
 							"description": "The blue value."
@@ -15399,8 +15305,7 @@
 						},
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "a",
 							"description": "The alpha value."
@@ -17773,7 +17678,6 @@
 						},
 						{
 							"type": [
-								"character",
 								"interactable"
 							],
 							"name": "interactable",
@@ -18241,8 +18145,7 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "range",
 							"description": "The maximum range."
@@ -18552,8 +18455,7 @@
 					"params": [
 						{
 							"type": [
-								"number",
-								"string"
+								"number"
 							],
 							"name": "strength",
 							"description": "The camera shake strength."
