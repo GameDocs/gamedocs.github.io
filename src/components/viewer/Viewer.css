@@ -1,0 +1,75 @@
+#viewer {
+	overflow: hidden;
+	display: flex;
+	padding-top: 9px;
+}
+
+#summary {
+	background-color: #111;
+	position: fixed;
+	height: calc(100vh - 49px);
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 250px;
+	max-width: 250px;
+	scrollbar-width: thin;
+	font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+}
+
+#overview {
+	background-color: #222;
+	position: fixed;
+	width: calc(100% - 250px);
+	height: calc(100vh - 49px);
+	left: 250px;
+}
+
+#editor {
+	background-color: #222;
+	flex: 1;
+}
+
+#searchBar {
+	background-color: #333;
+	padding: 5px;
+	width: 100%;
+	border: none;
+	margin-bottom: 5px;
+
+	color: white;
+}
+
+#searchBar:focus {
+	outline-width: 0;
+	outline: none;
+	border: none;
+}
+
+.MuiTreeItem-content {
+	user-select: none;
+}
+
+.Mui-expanded > .MuiTreeItem-content {
+	background-color: #0aa;
+	height: 18px;
+	padding-top: 3px;
+	border-bottom: 3px solid #7ac;
+	border-radius: 3px 3px 0 0;
+	transition: background-color 0.1s;
+}
+
+.MuiTreeItem-root {
+	background-color: initial;
+}
+
+.Mui-selected {
+	background-color: #000;
+}
+
+.Mui-expanded.MuiTreeItem-root {
+	background-color: #333;
+}
+
+.MuiTreeItem-iconContainer {
+	width: 0px;
+}
