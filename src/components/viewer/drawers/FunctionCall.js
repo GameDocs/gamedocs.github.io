@@ -1,0 +1,60 @@
+import React from 'react';
+import './../Viewer.css';
+import overview from './../Overview.module.scss';
+import { capitalizeName } from './FunctionUtil';
+
+function prettyName(ns) {
+	let name = ns.substr(ns.lastIndexOf('.') + 1);
+	return capitalizeName(name);
+}
+
+function prettyParams(params, isLocal) {
+	let result = '';
+
+	for(let idx in params) {
+		if(isLocal && idx === 0) {
+			// If we display a local function we do not show
+			// the self parameter
+			continue;
+		}
+
+		let elm = params[idx];
+		result += ', ';
+
+		if(elm.name) {
+			result += elm.name;
+		} else {
+			if(elm.type.length === 1) {
+				result += elm.type;
+			} else {
+				result += `[${elm.type}]`;
+			}
+		}
+	}
+
+	if(result.length > 0) {
+		result = result.substr(2);
+	}
+
+	return result;
+}
+
+function FunctionCall(props) {
+	let data = props.data;
+
+	let callName = ''
+	if(data.isLocal) {
+		callName = '<' + prettyName(data.namespace) + '>:';
+	} else {
+		callName = data.namespace + '.';
+	}
+	let callParams = prettyParams(data.func.params, data.isLocal);
+	
+	return (
+		<pre className={`${overview.Function_call}`}>
+			{callName}<span className={`${overview.Function_call_name}`}>{data.name}</span>({callParams})
+		</pre>
+	);
+}
+
+export default FunctionCall;

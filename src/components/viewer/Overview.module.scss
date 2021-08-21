@@ -1,0 +1,165 @@
+.Function {
+	/*background-color: rgb(139, 108, 62);*/
+	background-color: #463c2d;
+	border-bottom: 4px solid rgb(124, 93, 61);
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	margin-right: 10px;
+	color: white;
+	display: flex;
+
+	&_content {
+		flex: 1;
+		padding: 0;
+		margin: 0;
+	}
+	
+	&_editor {
+		background-color: #0003;
+		border-radius: 5px;
+		padding: 5px;
+		margin-left: 10px;
+		flex: 1;
+		resize: both;
+	}
+}
+
+.Function_local {
+	background-color: #48372d;
+	border-bottom: 4px solid rgb(112, 92, 73);
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	color: white;
+}
+
+.FunctionHeader {
+	margin-bottom: 5px;
+	min-height: 20px;
+
+	& > span {
+		float: left;
+		margin-right: 5px;
+	}
+}
+
+/* Sandbox should be different depending on context */
+.Function_sandbox {
+	background-color: #0003;
+	color: orange;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 2px 5px 4px 5px;
+	border-radius: 10px;
+	margin-left: 5px;
+}
+
+.Function_name {
+	color: white;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+
+	&:hover {
+		border-bottom: 2px solid white;
+		transition: border-radius 0.1s;
+		border-radius: 0px;
+	}
+}
+
+.Function_call_name {
+	color: #709f70;
+}
+
+/* Function call information. Code example */
+.Function_call {
+	background-color: rgb(27, 27, 27);
+	border-bottom: 4px solid rgb(109, 78, 49);
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 10px 5px 10px 5px;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+
+/* Function params */
+.Function_params {
+	background-color: #0002;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 2px;
+	margin: 0;
+
+	& ul {
+		list-style: circle;
+	}
+
+	&_name {
+		font-weight: bold;
+	}
+
+	&_type {
+		font-style: italic;
+		&::before {
+			content: ' <';
+			color: #f70;
+		}
+
+		&::after {
+			content: '>';
+			color: #f70;
+		}
+	}
+	
+	&_separator::after {
+		content: ', ';
+		color: #f70;
+	}
+}
+
+/* Function description */
+.Function_desc {
+	padding-left: 10px;
+	font-size: 16px;
+	/*border-left: 2px solid rgb(56, 40, 25);*/
+
+	& a {
+		color: rgb(247, 212, 54);
+	}
+
+	& code {
+		word-spacing: pre-wrap;
+		word-break: keep-all;
+	}
+
+	& p {
+		margin: 10px 0 10px 0;
+	}
+}
+
+.Function_desc_note, .Function_desc_warning {
+	margin-top: 20px;
+	border-radius: 5px;
+	overflow: hidden;
+
+	& div {
+		padding: 0 0 5px 5px;
+	}
+
+	&.note_title {
+		background-color: #0003;
+		border-radius: 5px 5px 0 0;
+		padding: 5px;
+		margin: 0;
+	}
+}
+
+.Function_desc_note {
+	background-color: #476947;
+}
+
+.Function_desc_warning {
+	background-color: #818a08;
+}

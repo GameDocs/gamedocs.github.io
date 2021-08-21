@@ -8,11 +8,11 @@ import NavItem from './components/navbar/NavItem';
 function App() {
 	return (
 		<div className="App">
-			<Navbar>
+			{/*<Navbar>
 				<NavItem name="Documentation" path="/"/>
 				<NavItem name="Editor" path="/edit"/>
 				<NavItem name="Test" path="/test"/>
-			</Navbar>
+			</Navbar>*/}
 
 			<Switch>
 				<Route path="/test">

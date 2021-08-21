@@ -1,13 +1,16 @@
+:root {
+	--navbar-height: 0px;
+}
+
 #viewer {
 	overflow: hidden;
 	display: flex;
-	padding-top: 9px;
 }
 
 #summary {
-	background-color: #111;
+	background-color: #222;
 	position: fixed;
-	height: calc(100vh - 49px);
+	height: calc(100vh - var(--navbar-height));
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 250px;
@@ -17,11 +20,13 @@
 }
 
 #overview {
-	background-color: #222;
+	background-color: #333;
+	color: white;
 	position: fixed;
 	width: calc(100% - 250px);
-	height: calc(100vh - 49px);
+	height: calc(100vh - var(--navbar-height));
 	left: 250px;
+	overflow-y: scroll;
 }
 
 #editor {
@@ -35,6 +40,7 @@
 	width: 100%;
 	border: none;
 	margin-bottom: 5px;
+	font-size: 14px;
 
 	color: white;
 }
@@ -45,25 +51,28 @@
 	border: none;
 }
 
+
+
 .MuiTreeItem-content {
 	user-select: none;
+	background-color: #1d1d1d;
 }
 
 .Mui-expanded > .MuiTreeItem-content {
-	background-color: #0aa;
-	height: 18px;
-	padding-top: 3px;
-	border-bottom: 3px solid #7ac;
-	border-radius: 3px 3px 0 0;
+	background-color: #072;
 	transition: background-color 0.1s;
+}
+
+.Mui-expanded > .MuiTreeItem-content .MuiTreeItem-label {
+	background-color: #fff3;
 }
 
 .MuiTreeItem-root {
 	background-color: initial;
 }
 
-.Mui-selected {
-	background-color: #000;
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label {
+	background-color: #fff3 !important;
 }
 
 .Mui-expanded.MuiTreeItem-root {
@@ -72,4 +81,10 @@
 
 .MuiTreeItem-iconContainer {
 	width: 0px;
+}
+
+.MuiTreeItem-group .MuiTreeItem-content {
+	background-color: #222;
+	border-radius: 0;
+	border: none;
 }
