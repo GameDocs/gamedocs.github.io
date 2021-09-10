@@ -117,6 +117,7 @@ function DocsView(props) {
 				search_list.appendChild(search_elements[i]);
 			}
 		}
+		
 		if(window.location.hash) {
 			let hash = window.location.hash.substring(1);
 			let namespace;

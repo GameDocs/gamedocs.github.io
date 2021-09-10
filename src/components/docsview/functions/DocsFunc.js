@@ -97,12 +97,16 @@ function DeclParameters(json) {
 function DocsFunc(namespace_name, function_name, json, local) {
 	let local_id = namespace_name + (local ? ':':'.') + function_name;
 	let link_id = local_id.toLowerCase();
+
+	let ns_name = namespace_name.substr(namespace_name.lastIndexOf('.') + 1);
+	let fn_name = local ? ('<' + ns_name.substr(0, 1).toUpperCase() + ns_name.substr(1) + '>:' + function_name):local_id;
+
 	return (
 		<div id={link_id} style={{ "display": "none" }} className={`${styles.DeclFunction}`}><br/><br/>
 			<dl>
 				<dt className={`${styles.DeclHeader} ${local ? styles.Userdata:styles.Tabledata}`}>
 					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclSandbox}`}>{json.sandbox}</code></span>
-					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclName}`}>{local ? function_name:local_id}</code></span>
+					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclName}`}>{fn_name}</code></span>
 					<span className={`${styles.DeclSeparator}`}><span className={`${styles.DeclParameters}`}>{DeclParameters(json.params)}</span></span>
 					<CopyToClipboard text={window.location.href.replace(new RegExp(window.location.hash, 'g'), '') + '#' + link_id} onCopy={() => {
 						window.location.hash = '#'
@@ -114,7 +118,6 @@ function DocsFunc(namespace_name, function_name, json, local) {
 						<ReactMarkdown linkTarget={MARKDOWN_LINK_TARGET}>{json.description}</ReactMarkdown>
 
 						{local ? from_func(() => {
-							let ns_name = namespace_name.substr(namespace_name.lastIndexOf('.') + 1);
 							return (
 								<div>
 									<p>Example Usage:</p>
