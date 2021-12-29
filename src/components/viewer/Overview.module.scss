@@ -17,23 +17,45 @@
 	}
 	
 	&_editor {
+		transition: flex 0.5s, opacity 0.5s, padding 0.2s;
 		background-color: #0003;
 		border-radius: 5px;
 		padding: 5px;
 		margin-left: 10px;
 		flex: 1;
-		resize: both;
-	}
-}
+		max-width: 100%;
+		min-width: 0px;
+		width: 100%;
+		border-left: 10px solid rgb(112, 92, 73);
 
-.Function_local {
-	background-color: #48372d;
-	border-bottom: 4px solid rgb(112, 92, 73);
-	padding: 10px;
-	border-radius: 4px;
-	margin-bottom: 10px;
-	margin-right: 10px;
-	color: white;
+		&_hidden {
+			transition: flex 0.5s, padding 0.2s;
+			width: 0px;
+			padding: 0;
+			flex: 0 !important;
+
+			& * {
+				transition: opacity 0.5s;
+				opacity: 0;
+			}
+		}
+	}
+
+	&_local {
+		background-color: #48372d;
+		border-bottom: 4px solid rgb(112, 92, 73);
+		padding: 10px;
+		border-radius: 4px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		color: white;
+	}
+
+	&_label {
+		font-size: 16px;
+		margin-top: 5px;
+		margin-left: 5px;
+	}
 }
 
 .FunctionHeader {
@@ -91,6 +113,7 @@
 	font-size: 14px;
 	padding: 2px;
 	margin: 0;
+	margin-top: 5px;
 
 	& ul {
 		list-style: circle;

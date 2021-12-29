@@ -9,20 +9,65 @@
 .Param {
 	border-bottom: 2px solid #0005;
 	padding-bottom: 10px;
-	margin-left: 20px;
+	margin-left: 0;
+	overflow: hidden;
+	transition: height 0.1s;
 	margin-bottom: 10px;
 
 	& label {
 		display: inline-block;
+		transition: height 0.1s;
 		font-size: 14px;
 		user-select: none;
-		min-width: 100%;
-		max-width: 100%;
-		width: 100%;
+		margin-top: 5px;
+		min-width: calc(100% - 10px);
+		max-width: calc(100% - 10px);
+		width: calc(100% - 10px);
+		margin-left: 10px;
 	}
 
-	&_buttons {
-		float: right;
+	&_label {
+		transition: height 0.1s;
+		overflow: hidden;
+		margin-bottom: 10px;
+		user-select: none;
+
+		&::before {
+			content: '\2193';
+			background-color: #0003;
+			text-align: center;
+			border-radius: 4px 4px 0 0;
+			float: right;
+			width: 20px;
+		}
+	}
+
+	&_label_single {
+		overflow: hidden;
+		margin-bottom: 10px;
+		user-select: none;
+	}
+
+	&_folding {
+		overflow: hidden;
+		& * {
+			opacity: 0;
+			height: 0px;
+		}
+
+		&::before {
+			content: '\2192';
+			text-align: center;
+			border-radius: 4px;
+			float: right;
+			width: 20px;
+		}
+	}
+
+	&_block {
+		background-color: #0003;
+		border-radius: 5px 0 5px 5px;
+		padding: 5px;
 	}
 
 	&_text {
@@ -53,6 +98,14 @@
 		height: 26px;
 	}
 	
+	&_buttons_move {
+		float: left;
+	}
+
+	&_buttons_remove {
+		float: right;
+	}
+
 	&_button {
 		background-color: #1b1b1b;
 		border: 0;
@@ -86,5 +139,22 @@
 			transition: background-color 0s;
 			background-color: #740;
 		}
+	}
+}
+
+.Description {
+	&_textarea {
+		background-color: #1b1b1b;
+		border: 0;
+		border-bottom: 2px solid rgb(82, 61, 41);
+		padding: 5px 10px 5px 10px;
+		border-radius: 5px;
+		margin-left: 10px;
+		margin-right: 10px;
+		color: white;
+		outline: 0;
+		resize: vertical;
+		width: calc(100% - 30px);
+		height: 26px;
 	}
 }

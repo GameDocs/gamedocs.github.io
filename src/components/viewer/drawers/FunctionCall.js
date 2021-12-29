@@ -4,7 +4,7 @@ import overview from './../Overview.module.scss';
 import { capitalizeName } from './FunctionUtil';
 
 function prettyName(ns) {
-	let name = ns.substr(ns.lastIndexOf('.') + 1);
+	let name = ns.substring(ns.lastIndexOf('.') + 1);
 	return capitalizeName(name);
 }
 
@@ -12,9 +12,8 @@ function prettyParams(params, isLocal) {
 	let result = '';
 
 	for(let idx in params) {
-		if(isLocal && idx === 0) {
-			// If we display a local function we do not show
-			// the self parameter
+		if(isLocal && idx < 1) {
+			// We do not show the first parameter of a local function
 			continue;
 		}
 
@@ -33,7 +32,7 @@ function prettyParams(params, isLocal) {
 	}
 
 	if(result.length > 0) {
-		result = result.substr(2);
+		result = result.substring(2);
 	}
 
 	return result;

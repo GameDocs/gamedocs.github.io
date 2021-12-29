@@ -6,6 +6,7 @@ import SandboxTag from './SandboxTag';
 import FunctionCall from './FunctionCall';
 import FunctionDesc from './FunctionDesc';
 import FunctionParams from './FunctionParams';
+import FunctionReturns from './FunctionReturns';
 
 function prettyName(ns) {
 	let name = ns.substr(ns.lastIndexOf('.') + 1);
@@ -35,6 +36,7 @@ function FunctionRender(props) {
 
 			<FunctionParams data={data}/>
 			<FunctionDesc desc={func.description}/>
+			<FunctionReturns data={data}/>
 		</div>
 	);
 }

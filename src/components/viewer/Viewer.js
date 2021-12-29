@@ -31,43 +31,6 @@ function TestTree() {
 	return list;
 }
 
-function FunctionParameters(func) {
-	let list = [];
-
-	let json_keys = Object.keys(func);
-	for(let i in json_keys) {
-		let name = json_keys[i];
-		let a = func[name];
-		console.log(a);
-	}
-
-	return (
-		<span>
-			{list}
-		</span>
-	);
-}
-
-/*
-function StringifyParam(param, allowName = true) {
-	if(param.name && allowName) {
-		return (<code className={`${styles.DeclParam}`}>{param.name}</code>);
-	}
-	
-	if(param.type.length === 1) {
-		return (<code className={`${styles.DeclParam}`}>{param.type[0]}</code>);
-	}
-
-	return (
-		<code className={`${styles.DeclParamTable}`}>
-			{param.type.map((value) => {
-				return (<code className={`${styles.DeclParam}`}>{value}</code>);
-			})}
-		</code>
-	);
-}
-*/
-
 function TestOverview(namespace) {
 	let list = [];
 	{
@@ -192,8 +155,30 @@ function Viewer(props) {
 
 	let version = "0.5.1";
 
+	React.useEffect(() => {
+		document.body.addEventListener('keydown', (event) => {
+			if((event.ctrlKey || event.metaKey) && event.key === 's') {
+				event.preventDefault();
+
+				let data = JSON.stringify(DocsJson.content, null, 4);
+				const jsonBlob = new Blob([data], {type : 'application/json'});
+				
+				let modal = document.getElementById('save-modal');
+				modal.classList.toggle('save-modal-visible');
+
+				let modalLink = document.getElementById('save-modal-href');
+				modalLink.href = URL.createObjectURL(jsonBlob);
+			}
+		});
+	}, []);
+
 	return (
 		<div id="viewer">
+			<div id="save-modal" onMouseDown={event => event.target.classList.toggle('save-modal-visible')}>
+				<div className={`${styles.Modal}`}>
+					<a id="save-modal-href" href="" download={`${'0.5.1_658_edited.json'}`}>Save JSON</a>
+				</div>
+			</div>
 			{/**
 			* Three section
 			* 

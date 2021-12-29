@@ -8,3 +8,23 @@
 .Content {
 	padding-left: 10px;
 }
+
+.Modal {
+	background-color: #f0f0f0;
+	text-align: center;
+	border-radius: 5px;
+	width: 100px;
+	height: 26px;
+	position: relative;
+	overflow: hidden;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	
+	& a {
+		color: black;
+		margin-top: 5px;
+		font-size: 18px;
+		user-select: none;
+	}
+}

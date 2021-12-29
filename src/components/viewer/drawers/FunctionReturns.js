@@ -3,10 +3,6 @@ import './../Viewer.css';
 import overview from './../Overview.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
-function getParamName(param, idx) {
-	return `${param.name || ('param ' + idx)}`;
-}
-
 function getParamType(types) {
 	if(types.length === 1) {
 		return capitalizeTypeName(types);
@@ -25,23 +21,17 @@ function getParamType(types) {
 	return elements;
 }
 
-function FunctionParams(props) {
+function FunctionReturns(props) {
 	let func = props.data.func;
-	let params = func.params;
-	let isLocal = props.data.isLocal;
-	if(params.length < (isLocal ? 2:1)) {
+	let returns = func.returns;
+	if(returns.length < 1) {
 		return '';
 	}
 
 	let elements = [];
 	
-	for(let idx in params) {
-		if(isLocal && idx < 1) {
-			// We do not show the first parameter of a local function
-			continue;
-		}
-
-		let param = params[idx];
+	for(let idx in returns) {
+		let param = returns[idx];
 		let desc = '';
 
 		if(typeof param.description !== 'undefined') {
@@ -51,9 +41,6 @@ function FunctionParams(props) {
 		elements.push((
 			<ul>
 				<li key={`${idx}`}>
-					<span className={`${overview.Function_params_name}`}>
-						{getParamName(param, idx)}
-					</span>
 					<span className={`${overview.Function_params_type}`}>
 						{getParamType(param.type)}
 					</span>
@@ -64,11 +51,11 @@ function FunctionParams(props) {
 	}
 
 	return (
-		<div className={`${overview.Function_params}`}>
-			<span className={`${overview.Function_label}`}>Params:</span>
+		<div class={`${overview.Function_params}`}>
+			<span className={`${overview.Function_label}`}>Returns:</span>
 			{elements}
 		</div>
 	);
 }
 
-export default FunctionParams;
+export default FunctionReturns;

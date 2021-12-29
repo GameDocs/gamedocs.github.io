@@ -51,6 +51,25 @@
 	border: none;
 }
 
+#save-modal {
+	transition: opacity 0.1s;
+	background-color: #0007;
+	position: absolute;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	z-index: 9999;
+	opacity: 0;
+	user-select: none;
+	pointer-events: none;
+}
+
+#save-modal.save-modal-visible {
+	opacity: 1;
+	user-select: initial;
+	pointer-events: initial;
+}
+
 
 
 .MuiTreeItem-content {
