@@ -1,5 +1,5 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 
 const colors = {
 	serverMethod: 'aqua',
@@ -8,17 +8,22 @@ const colors = {
 	undefined: 'gray',
 
 	defaultColor: 'orange'
-}
+};
+
+const translation = {
+	serverMethod: 'Server',
+	clientMethod: 'Client',
+	removedMethod: 'Removed'
+};
 
 function SandboxTag(props) {
-	// If props does not contain sandbox return nothing
-	if(!props.sandbox || props.sandbox === 'undefined') return '';
+	if(!props.sandbox || props.sandbox === 'undefined') return null;
 
 	let sandboxColor = colors[props.sandbox] || colors.defaultColor;
 
 	return (
-		<span className={`${overview.Function_sandbox}`} style={{color: `${sandboxColor}`}}>
-			{`${props.sandbox}`}
+		<span className={`${functionStyle.Sandbox}`} style={{color: `${sandboxColor}`}}>
+			{`${translation[props.sandbox]}`}
 		</span>
 	);
 }

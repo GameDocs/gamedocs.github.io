@@ -1,0 +1,133 @@
+.Function {
+	background-color: #463c2d;
+	border-bottom: 4px solid rgb(124, 93, 61);
+	padding: 10px;
+	border-radius: 4px;
+	overflow: hidden;
+	margin-top: 10px;
+	margin-right: 10px;
+	color: white;
+	display: flex;
+	/* Test */
+	background: linear-gradient(45deg, rgb(97, 76, 39) 0%, rgb(70, 60, 45) 100%);
+}
+
+.LocalFunction {
+	background-color: #48372d;
+	border-bottom: 4px solid rgb(112, 92, 73);
+	padding: 10px;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	color: white;
+}
+
+.Content {
+	flex: 1;
+	padding: 0;
+	margin: 0;
+}
+
+/* Sandbox should be different depending on context */
+.Sandbox {
+	background-color: #0003;
+	color: orange;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 2px 5px 4px 5px;
+	border-radius: 10px;
+	margin-left: 5px;
+}
+
+.Name {
+	color: white;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+
+	&:hover {
+		border-bottom: 2px solid white;
+		transition: border-radius 0.1s;
+		border-radius: 0px;
+	}
+}
+
+/* Function call information. Code example */
+.Call {
+	/*border-bottom: 4px solid rgb(109, 78, 49);*/
+	/*border-radius: 5px;*/
+	background-color: #1b1b1b;
+	border-bottom: 4px solid #3c2d20;
+	font-size: 14px;
+	padding: 10px 5px 10px 10px;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	border-radius: 5px 5px 10px 10px;
+}
+
+.CallName {
+	color: #709f70;
+}
+
+.Params {
+	/*border-bottom: 4px solid rgb(109, 78, 49);*/
+	/*background-color: #0002;*/
+	/*border-radius: 5px;*/
+	background-color: #1b1b1b;
+	border-bottom: 4px solid #3c2d20;
+	border-radius: 5px 5px 10px 10px;
+	font-size: 14px;
+	padding: 2px;
+	margin: 0;
+	margin-top: 5px;
+
+	& ul {
+		list-style: circle;
+	}
+}
+
+.ParamLabel {
+	font-size: 16px;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.ParamName {
+	font-weight: bold;
+}
+
+.ParamType {
+	font-style: italic;
+	&::before {
+		content: ' <';
+		color: #f70;
+	}
+
+	&::after {
+		content: '>';
+		color: #f70;
+	}
+}
+	
+.ParamSeparator::after {
+	content: ', ';
+	color: #f70;
+}
+
+.Description {
+	padding-left: 10px;
+	font-size: 16px;
+	/*border-left: 2px solid rgb(56, 40, 25);*/
+
+	& a {
+		color: rgb(247, 212, 54);
+	}
+
+	& code {
+		word-spacing: pre-wrap;
+		word-break: keep-all;
+	}
+
+	& p {
+		margin: 10px 0 10px 0;
+	}
+}

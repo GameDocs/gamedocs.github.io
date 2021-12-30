@@ -1,29 +1,32 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 import editor from './../Editor.module.scss';
 
 import FunctionRender from './FunctionRender'
+
+// TODO: Maybe tint function boxes depending on the sandbox
 
 class FunctionView extends React.Component {
 	constructor(props) {
 		super(props);
 		let data = props.data;
-		this.state = {data: props.data};
+		this.state = {data: props.data, menu: false};
 		this.id = `${data.namespace}_${data.name}_${data.isLocal}`;
 		this.onSandboxChanged = this.onSandboxChanged.bind(this);
 		this.onDescriptionChange = this.onDescriptionChange.bind(this);
 		this.onAddParam = this.onAddParam.bind(this);
 		this.onAddReturnParam = this.onAddReturnParam.bind(this);
 	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({data: nextProps.data, menu: false});
+	}
 	
 	onSandboxChanged(event) {
 		this.state.data.func.sandbox = event.target.value;
-		this.setState({data: this.state.data});
-	}
-
-	componentWillReceiveProps(nextProps) {
-		this.setState({data: nextProps.data});
+		this.refresh();
 	}
 
 	onRemoveParam(idx) {
@@ -52,7 +55,7 @@ class FunctionView extends React.Component {
 	}
 
 	onParamTypeChange(event, param) {
-		param.type = `${event.target.value}`.split(',');
+		param.type = `${event.target.value}`.replaceAll(' ', '').split(',');
 		this.refresh();
 	}
 
@@ -92,7 +95,7 @@ class FunctionView extends React.Component {
 
 	
 	onReturnTypeChange(event, param) {
-		param.type = `${event.target.value}`.split(',');
+		param.type = `${event.target.value}`.replaceAll(' ', '').split(',');
 		this.refresh();
 	}
 
@@ -114,9 +117,8 @@ class FunctionView extends React.Component {
 		this.refresh();
 	}
 	
-
 	refresh() {
-		this.setState({data: this.state.data});
+		this.setState({data: this.state.data, menu: true});
 	}
 
 	createSandboxSelection() {
@@ -127,10 +129,10 @@ class FunctionView extends React.Component {
 				name='sandbox'
 				onChange={this.onSandboxChanged}
 			>
-				<option value='undefined'>default</option>
-				<option value='serverMethod'>serverMethod</option>
-				<option value='clientMethod'>clientMethod</option>
-				<option value='removedMethod'>removedMethod</option>
+				<option value='serverMethod'>Server</option>
+				<option value='clientMethod'>Client</option>
+				<option value='removedMethod'>Removed</option>
+				<option value='undefined'>Default</option>
 			</select>
 		);
 	}
@@ -143,7 +145,6 @@ class FunctionView extends React.Component {
 		if(typeof params !== 'undefined') {
 			for(let idx in params) {
 				if(isLocal && idx < 1) {
-					// We do not show the first parameter of a local function
 					continue;
 				}
 				let param = params[idx];
@@ -251,14 +252,12 @@ class FunctionView extends React.Component {
 
 	createDescriptionEditor() {
 		return (
-			<div>
-				<textarea
-					className={`${editor.Description_textarea}`}
-					value={`${this.state.data.func.description || ''}`}
-					spellcheck='false'
-					onChange={this.onDescriptionChange}
-				/>
-			</div>
+			<textarea
+				className={`${editor.Description_textarea}`}
+				value={`${this.state.data.func.description || ''}`}
+				spellcheck='false'
+				onChange={this.onDescriptionChange}
+			/>
 		);
 	}
 
@@ -298,32 +297,26 @@ class FunctionView extends React.Component {
 
 	render() {
 		let data = this.state.data;
+		let menu = this.state.menu;
 
-		let editorDiv = '';
-		if(!isMobile) {
-			// Only show the editor if we are on desktop. Adding this will also make the
-			// page load faster on mobile and more power efficient
-			
-			let folding = (event) => {
-				if(event.currentTarget === event.target) {
-					event.currentTarget.classList.toggle(`${overview.Function_editor_hidden}`);
-				}
-			};
+		let folding = (event) => {
+			// Make sure we cannot access the edit menu on phones
+			if(isMobile) return;
 
-			editorDiv = (
-				<div
-					className={`${overview.Function_editor} ${overview.Function_editor_hidden}`}
-					onClick={folding}
-				>
-					{this.renderForm()}
-				</div>
-			);
-		}
+			if(event.currentTarget === event.target) {
+				this.setState({data: data, menu: !menu});
+			}
+		};
 
 		return (
-			<div className={`${overview.Function} ${data.isLocal ? `${overview.Function_local}`:''}`}>
+			<div className={`${functionStyle.Function} ${data.isLocal ? functionStyle.LocalFunction:''}`}>
 				<FunctionRender data={data}/>
-				{editorDiv}
+				<div
+					className={`${overview.Function_editor} ${menu ? '':overview.Function_editor_hidden}`}
+					onClick={folding}
+				>
+					{menu ? this.renderForm():null}
+				</div>
 			</div>
 		);
 	}

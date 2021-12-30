@@ -1,19 +1,16 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
 function getParamType(types) {
-	if(types.length === 1) {
-		return capitalizeTypeName(types);
-	}
-
 	let elements = [];
 	for(let idx in types) {
 		let type = types[idx];
 
 		if(idx > 0) {
-			elements.push(<span className={`${overview.Function_params_separator}`}/>);
+			elements.push(<span className={`${functionStyle.ParamSeparator}`}/>);
 		}
+
 		elements.push(capitalizeTypeName(type));
 	}
 	
@@ -24,7 +21,7 @@ function FunctionReturns(props) {
 	let func = props.data.func;
 	let returns = func.returns;
 	if(returns.length < 1) {
-		return '';
+		return null;
 	}
 
 	let elements = [];
@@ -40,7 +37,7 @@ function FunctionReturns(props) {
 		elements.push(
 			<ul>
 				<li key={`${idx}`}>
-					<span className={`${overview.Function_params_type}`}>
+					<span className={`${functionStyle.ParamType}`}>
 						{getParamType(param.type)}
 					</span>
 					{desc}
@@ -50,8 +47,8 @@ function FunctionReturns(props) {
 	}
 
 	return (
-		<div class={`${overview.Function_params}`}>
-			<span className={`${overview.Function_label}`}>Returns:</span>
+		<div class={`${functionStyle.Params}`}>
+			<span className={`${functionStyle.ParamLabel}`}>Returns:</span>
 			{elements}
 		</div>
 	);

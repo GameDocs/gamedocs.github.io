@@ -3,7 +3,6 @@ import './Viewer.css';
 import styles from './Viewer.module.scss';
 import ReactDOM from 'react-dom';
 
-import HamburgerLogo from './hamburger.svg';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -11,8 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import FunctionView from './drawers/FunctionView';
-
-
 import DocsJson from '../data/api.0.5.1_658.json';
 
 function TestTree() {
@@ -23,7 +20,7 @@ function TestTree() {
 	let json_keys = Object.keys(json);
 	for(let i in json_keys) {
 		let name = json_keys[i];
-		let cont = json[json_keys[i]];
+		// let cont = json[json_keys[i]];
 
 		list.push(<TreeItem nodeId={`${name}`} label={`${name}`} />);
 	}
@@ -128,7 +125,7 @@ function Viewer(props) {
 
 			let text = elm.innerText;
 			let idx = text.indexOf(search);
-			if(idx == -1) {
+			if(idx === -1) {
 				elm.style.display = 'none';
 			} else {
 				elm.style.display = '';
@@ -149,19 +146,19 @@ function Viewer(props) {
 		document.body.addEventListener('keydown', (event) => {
 			if((event.ctrlKey || event.metaKey) && event.key === 's') {
 				event.preventDefault();
-
-				let data = JSON.stringify(DocsJson.content, null, 4);
-				const jsonBlob = new Blob([data], {type : 'application/json'});
 				
 				let modal = document.getElementById('save-modal');
 				modal.classList.toggle('save-modal-visible');
 
+				let data = JSON.stringify(DocsJson.content, null, 4);
+				const jsonBlob = new Blob([data], {type : 'application/json'});
+				
 				let modalLink = document.getElementById('save-modal-href');
 				modalLink.href = URL.createObjectURL(jsonBlob);
 			}
 		});
 	}, []);
-
+	
 	const handleHamburger = (event) => {
 		console.log('Hamburger');
 		setMenu(!menu);
@@ -171,7 +168,7 @@ function Viewer(props) {
 		<div id="viewer">
 			<div id="save-modal" onMouseDown={event => event.target.classList.toggle('save-modal-visible')}>
 				<div className={`${styles.Modal}`}>
-					<a id="save-modal-href" href="" download={`${'0.5.1_658_edited.json'}`}>Save JSON</a>
+					<a href="." id="save-modal-href" download={`${'0.5.1_658_edited.json'}`}>Save JSON</a>
 				</div>
 			</div>
 			<div id="summary" className={`${styles.Summary} ${menu ? styles.Summary_show:''}`}>

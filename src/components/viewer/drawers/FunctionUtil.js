@@ -13,8 +13,8 @@ export function capitalizeName(name) {
 }
 
 export function capitalizeTypeName(name) {
-	if(typeof name === 'undefined') {
-		return '';
+	if(typeof name === 'undefined' || name.length === 0) {
+		return 'Unknown';
 	}
 	
 	// Convert name into a string
@@ -27,13 +27,14 @@ export function capitalizeTypeName(name) {
 		'Interactable', 'Joint', 'Lift', 'Network', 'PathNode',
 		'Player', 'Portal', 'Quat', 'Quest', 'RaycastResult',
 		'Shape', 'Storage', 'Tool', 'Unit', 'Uuid', 'Vec3',
-		'Visualization', 'Blueprint'
+		'Visualization', 'Blueprint', 'GuiInterface'
 	];
 	*/
 
 	switch(name.toLowerCase()) {
 		case 'aistate': return 'AiState';
 		case 'areatrigger': return 'AreaTrigger';
+		case 'guiinterface': return 'GuiInterface';
 		case 'pathnode': return 'PathNode';
 		case 'raycastresult': return 'RaycastResult';
 	}

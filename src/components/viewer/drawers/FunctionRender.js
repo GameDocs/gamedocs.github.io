@@ -1,5 +1,5 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 
 import SandboxTag from './SandboxTag';
 import FunctionCall from './FunctionCall';
@@ -24,9 +24,9 @@ function FunctionRender(props) {
 	}
 	
 	return (
-		<div className={`${overview.Function_content}`}>
+		<div className={`${functionStyle.Content}`}>
 			<div>
-				<span className={`${overview.Function_name}`}>
+				<span className={`${functionStyle.Name}`}>
 					{`${funcName}`}
 				</span>
 				<SandboxTag sandbox={`${func.sandbox}`}/>

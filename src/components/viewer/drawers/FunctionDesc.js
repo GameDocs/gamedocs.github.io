@@ -1,15 +1,15 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 import { processMarkdownTags } from './FunctionUtil';
 
 function FunctionDesc(props) {
 	let desc = props.desc;
 	if(typeof desc === 'undefined') {
-		return '';
+		return null;
 	}
 
 	return (
-		<div className={`${overview.Function_desc}`}>
+		<div className={`${functionStyle.Description}`}>
 			{processMarkdownTags(desc)}
 		</div>
 	);

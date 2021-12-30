@@ -67,13 +67,13 @@
 	&_block {
 		background-color: #0003;
 		border-radius: 5px 0 5px 5px;
-		padding: 5px;
+		padding: 2px 5px 7px 5px;
 	}
 
 	&_text {
 		background-color: #1b1b1b;
 		border: 0;
-		border-bottom: 2px solid rgb(82, 61, 41);
+		border-bottom: 3px solid #4e3a29;
 		padding: 1px 0 2px 10px;
 		border-radius: 5px;
 		margin-left: 10px;
@@ -86,7 +86,7 @@
 	&_textarea {
 		background-color: #1b1b1b;
 		border: 0;
-		border-bottom: 2px solid rgb(82, 61, 41);
+		border-bottom: 3px solid #4e3a29;
 		padding: 5px 10px 5px 10px;
 		border-radius: 5px;
 		margin-left: 10px;
@@ -144,12 +144,13 @@
 
 .Description {
 	&_textarea {
+		/*border-bottom: 2px solid rgb(82, 61, 41);*/
 		background-color: #1b1b1b;
 		border: 0;
-		border-bottom: 2px solid rgb(82, 61, 41);
+		border-bottom: 4px solid #4e3a29;
 		padding: 5px 10px 5px 10px;
 		border-radius: 5px;
-		margin-left: 10px;
+		margin-left: 5px;
 		margin-right: 10px;
 		color: white;
 		outline: 0;

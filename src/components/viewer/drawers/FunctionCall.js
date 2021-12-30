@@ -1,5 +1,5 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 import { capitalizeName } from './FunctionUtil';
 
 function prettyName(ns) {
@@ -49,8 +49,8 @@ function FunctionCall(props) {
 	let callParams = prettyParams(data.func.params, data.isLocal);
 	
 	return (
-		<pre className={`${overview.Function_call}`}>
-			{callName}<span className={`${overview.Function_call_name}`}>{data.name}</span>({callParams})
+		<pre className={`${functionStyle.Call}`}>
+			{callName}<span className={`${functionStyle.CallName}`}>{data.name}</span>({callParams})
 		</pre>
 	);
 }

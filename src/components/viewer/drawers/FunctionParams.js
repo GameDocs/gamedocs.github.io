@@ -1,5 +1,5 @@
 import React from 'react';
-import overview from './../Overview.module.scss';
+import functionStyle from './../Function.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
 function getParamName(param, idx) {
@@ -16,7 +16,7 @@ function getParamType(types) {
 		let type = types[idx];
 
 		if(idx > 0) {
-			elements.push(<span className={`${overview.Function_params_separator}`}/>);
+			elements.push(<span className={`${functionStyle.ParamSeparator}`}/>);
 		}
 		elements.push(capitalizeTypeName(type));
 	}
@@ -29,7 +29,7 @@ function FunctionParams(props) {
 	let params = func.params;
 	let isLocal = props.data.isLocal;
 	if(params.length < (isLocal ? 2:1)) {
-		return '';
+		return null;
 	}
 
 	let elements = [];
@@ -50,10 +50,10 @@ function FunctionParams(props) {
 		elements.push(
 			<ul>
 				<li key={`${idx}`}>
-					<span className={`${overview.Function_params_name}`}>
+					<span className={`${functionStyle.ParamName}`}>
 						{getParamName(param, idx)}
 					</span>
-					<span className={`${overview.Function_params_type}`}>
+					<span className={`${functionStyle.ParamType}`}>
 						{getParamType(param.type)}
 					</span>
 					{desc}
@@ -63,8 +63,8 @@ function FunctionParams(props) {
 	}
 
 	return (
-		<div className={`${overview.Function_params}`}>
-			<span className={`${overview.Function_label}`}>Params:</span>
+		<div className={`${functionStyle.Params}`}>
+			<span className={`${functionStyle.ParamLabel}`}>Params:</span>
 			{elements}
 		</div>
 	);
