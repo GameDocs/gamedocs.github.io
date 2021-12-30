@@ -4,7 +4,8 @@ import overview from './../Overview.module.scss';
 import functionStyle from './../Function.module.scss';
 import editor from './../Editor.module.scss';
 
-import FunctionRender from './FunctionRender'
+import FunctionRender from './FunctionRender';
+import AnimateHeight from 'react-animate-height';
 
 // TODO: Maybe tint function boxes depending on the sandbox
 
@@ -12,7 +13,12 @@ class FunctionView extends React.Component {
 	constructor(props) {
 		super(props);
 		let data = props.data;
-		this.state = {data: props.data, menu: false};
+		this.state = {
+			data: props.data,
+			menu: false,
+			paramFoldout: false,
+			returnFoldout: false
+		};
 		this.id = `${data.namespace}_${data.name}_${data.isLocal}`;
 		this.onSandboxChanged = this.onSandboxChanged.bind(this);
 		this.onDescriptionChange = this.onDescriptionChange.bind(this);
@@ -21,7 +27,12 @@ class FunctionView extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({data: nextProps.data, menu: false});
+		this.setState({
+			data: nextProps.data,
+			menu: false,
+			paramFoldout: false,
+			returnFoldout: false
+		});
 	}
 	
 	onSandboxChanged(event) {
@@ -118,7 +129,7 @@ class FunctionView extends React.Component {
 	}
 	
 	refresh() {
-		this.setState({data: this.state.data, menu: true});
+		this.setState({data: this.state.data});
 	}
 
 	createSandboxSelection() {
@@ -267,9 +278,18 @@ class FunctionView extends React.Component {
 		let descriptionEditor = this.createDescriptionEditor();
 		let returnParamEditor = this.createReturnParams();
 		
-		let folding = (event) => {
+		let isParamFoldout = this.state.paramFoldout;
+		let isReturnFoldout = this.state.returnFoldout;
+
+		let foldingParam = (event) => {
 			if(event.currentTarget === event.target) {
-				event.currentTarget.classList.toggle(`${editor.Param_folding}`);
+				this.setState({paramFoldout: !isParamFoldout});
+			}
+		};
+
+		let foldingReturn = (event) => {
+			if(event.currentTarget === event.target) {
+				this.setState({returnFoldout: !isReturnFoldout});
 			}
 		};
 
@@ -279,13 +299,17 @@ class FunctionView extends React.Component {
 					Sandbox:
 					{sandboxSelection}
 				</div>
-				<div className={`${editor.Param_label} ${editor.Param_folding}`} onClick={folding}>
+				<div className={`${editor.Param_label} ${isParamFoldout ? '':editor.Param_folding}`} onClick={foldingParam}>
 					Params:
-					{paramsEditor}
+					<AnimateHeight duration={300} height={isParamFoldout ? 'auto':0}>
+						{paramsEditor}
+					</AnimateHeight>
 				</div>
-				<div className={`${editor.Param_label} ${editor.Param_folding}`} onClick={folding}>
+				<div className={`${editor.Param_label} ${isReturnFoldout ? '':editor.Param_folding}`} onClick={foldingReturn}>
 					Return:
-					{returnParamEditor}
+					<AnimateHeight duration={300} height={isReturnFoldout ? 'auto':0}>
+						{returnParamEditor}
+					</AnimateHeight>
 				</div>
 				<div className={`${editor.Param_label_single}`}>
 					Description:
