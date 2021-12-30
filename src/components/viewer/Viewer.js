@@ -1,9 +1,9 @@
 import React from 'react';
 import './Viewer.css';
 import styles from './Viewer.module.scss';
-import overview from './Overview.module.scss';
 import ReactDOM from 'react-dom';
 
+import HamburgerLogo from './hamburger.svg';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -31,7 +31,7 @@ function TestTree() {
 	return list;
 }
 
-function TestOverview(namespace) {
+function DisplayOverview(namespace) {
 	let list = [];
 	{
 		let json = DocsJson.content[namespace].tabledata;
@@ -66,7 +66,6 @@ function TestOverview(namespace) {
 			list.push(<FunctionView data={data}/>);
 		}
 	}
-	
 
 	ReactDOM.render(
 		<div>
@@ -116,9 +115,9 @@ function Viewer(props) {
 			window.location.hash = '#' + hash.toLowerCase();
 		}*/
 	});
+	
+	const [ menu, setMenu ] = React.useState(false);
 
-	const [expanded, setExpanded] = React.useState([]);
-	const [selected, setSelected] = React.useState([]);
 
 	const updateTreeViewer = (search) => {
 		console.log('Filter again');
@@ -137,19 +136,10 @@ function Viewer(props) {
 		}
 	};
 
-	
-	const handleToggle = (event, nodeIds) => {
-		setExpanded((oldExpanded) =>
-			[ nodeIds[0] ]
-		);
-	};
-
 	const handleSelect = (event, nodeId) => {
-		setSelected(nodeId);
-
 		if(!nodeId.startsWith('#root_')) {
-			console.log(nodeId);
-			TestOverview(nodeId);
+			setMenu(false);
+			DisplayOverview(nodeId);
 		}
 	};
 
@@ -172,6 +162,11 @@ function Viewer(props) {
 		});
 	}, []);
 
+	const handleHamburger = (event) => {
+		console.log('Hamburger');
+		setMenu(!menu);
+	};
+	
 	return (
 		<div id="viewer">
 			<div id="save-modal" onMouseDown={event => event.target.classList.toggle('save-modal-visible')}>
@@ -179,69 +174,59 @@ function Viewer(props) {
 					<a id="save-modal-href" href="" download={`${'0.5.1_658_edited.json'}`}>Save JSON</a>
 				</div>
 			</div>
-			{/**
-			* Three section
-			* 
-			* When editing
-			*  [ Summary | Overview | Editor ]
-			* 
-			* When coding
-			*  [ Summary | Overview ]
-			* 
-			*/}
-			<div id="summary">
+			<div id="summary" className={`${styles.Summary} ${menu ? styles.Summary_show:''}`}>
 				<div>
 					<div className={`${styles.Version}`}>
 						ScrapMechanic {`${version}`} API
 					</div>
 					<input id="searchBar" type="text" placeholder="Search" name="search" onChange={(e) => updateTreeViewer(e.target.value)} />
 				</div>
-
 				<div className={`${styles.TreeViewer}`}>
 					<TreeView
 						className={`${styles.TreeView}`}
-						onNodeToggle={handleToggle}
+						defaultCollapseIcon={<ExpandMoreIcon/>}
+						defaultExpandIcon={<ChevronRightIcon/>}
 						onNodeSelect={handleSelect}
-						expanded={expanded}
 					>
-						<TreeItem nodeId="#root_1" label="General">
-							<TreeItem nodeId="#root_functions" label="Functions" />
-							<TreeItem nodeId="#root_userdata" label="Userdata" />
-						</TreeItem>
-						<TreeItem nodeId="#root_2" label="Callbacks">
-							{TestTree()}
-						</TreeItem>
-						<TreeItem nodeId="#root_3" label="Classes">
+						<TreeItem nodeId="#root_1" label="Functions">
 							{TestTree()}
 						</TreeItem>
 					</TreeView>
 				</div>
 			</div>
-			<div id="overview">
+			<div id="overview" className={`${menu ? styles.Overview_hide:''}`}>
 				<Breadcrumbs aria-label="breadcrumb">
 
 				</Breadcrumbs>
+				<div className={`${styles.Menu}`}>
+					<div className={`${styles.Menu_hamburger}`} onClick={handleHamburger}>
+						Hamburger
+					</div>
+				</div>
 
 				<div className={`${styles.Content}`}>
+					{
+					/*
 					<p>
 					This is the overview page that should display information about the
 					currently selected item in the summary page.
 					</p>
-
+					
 					<p>
 					All information here should show the modder/coder how to use the
 					namespace and provide information about how the callbacks/functions
 					should be used. This page should also include examples of code and
 					be used as a tool for other developers.
 					</p>
+					*/
+					}
+
+					<h1>Functions</h1>
 
 					<div id="overview-content">
 						
 					</div>
 				</div>
-			</div>
-			<div id="editor">
-				EDITOR
 			</div>
 		</div>
 	);

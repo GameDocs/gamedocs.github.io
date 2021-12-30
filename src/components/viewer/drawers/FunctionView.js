@@ -1,5 +1,5 @@
 import React from 'react';
-import './../Viewer.css';
+import { isMobile } from 'react-device-detect';
 import overview from './../Overview.module.scss';
 import editor from './../Editor.module.scss';
 
@@ -11,7 +11,6 @@ class FunctionView extends React.Component {
 		let data = props.data;
 		this.state = {data: props.data};
 		this.id = `${data.namespace}_${data.name}_${data.isLocal}`;
-		this.handleSubmit = this.handleSubmit.bind(this);
 		this.onSandboxChanged = this.onSandboxChanged.bind(this);
 		this.onDescriptionChange = this.onDescriptionChange.bind(this);
 		this.onAddParam = this.onAddParam.bind(this);
@@ -23,30 +22,8 @@ class FunctionView extends React.Component {
 		this.setState({data: this.state.data});
 	}
 
-	handleSubmit(event) {
-		console.log(this.state.data);
-		event.preventDefault();
-	}
-
 	componentWillReceiveProps(nextProps) {
 		this.setState({data: nextProps.data});
-	}
-	
-	createSandboxSelection() {
-		return (
-			<select
-				id={`${this.id}_sandbox`}
-				className={`${editor.Sandbox}`}
-				value={this.state.data.func.sandbox || 'undefined'}
-				name='sandbox'
-				onChange={this.onSandboxChanged}
-			>
-				<option value='undefined'>default</option>
-				<option value='serverMethod'>serverMethod</option>
-				<option value='clientMethod'>clientMethod</option>
-				<option value='removedMethod'>removedMethod</option>
-			</select>
-		);
 	}
 
 	onRemoveParam(idx) {
@@ -140,6 +117,22 @@ class FunctionView extends React.Component {
 
 	refresh() {
 		this.setState({data: this.state.data});
+	}
+
+	createSandboxSelection() {
+		return (
+			<select
+				className={`${editor.Sandbox}`}
+				value={this.state.data.func.sandbox || 'undefined'}
+				name='sandbox'
+				onChange={this.onSandboxChanged}
+			>
+				<option value='undefined'>default</option>
+				<option value='serverMethod'>serverMethod</option>
+				<option value='clientMethod'>clientMethod</option>
+				<option value='removedMethod'>removedMethod</option>
+			</select>
+		);
 	}
 
 	createParams() {
@@ -287,7 +280,6 @@ class FunctionView extends React.Component {
 					Sandbox:
 					{sandboxSelection}
 				</div>
-				{/*<label><span>Sandbox: </span>{sandboxSelection}</label>*/}
 				<div className={`${editor.Param_label} ${editor.Param_folding}`} onClick={folding}>
 					Params:
 					{paramsEditor}
@@ -297,10 +289,9 @@ class FunctionView extends React.Component {
 					{returnParamEditor}
 				</div>
 				<div className={`${editor.Param_label_single}`}>
-				Description:
+					Description:
 					{descriptionEditor}
 				</div>
-				{/*<label><span>Description: </span>{descriptionEditor}</label>*/}
 			</form>
 		);
 	}
@@ -308,22 +299,31 @@ class FunctionView extends React.Component {
 	render() {
 		let data = this.state.data;
 
-		let folding = (event) => {
-			if(event.currentTarget === event.target) {
-				event.currentTarget.classList.toggle(`${overview.Function_editor_hidden}`);
-			}
-		};
+		let editorDiv = '';
+		if(!isMobile) {
+			// Only show the editor if we are on desktop. Adding this will also make the
+			// page load faster on mobile and more power efficient
+			
+			let folding = (event) => {
+				if(event.currentTarget === event.target) {
+					event.currentTarget.classList.toggle(`${overview.Function_editor_hidden}`);
+				}
+			};
 
-		return (
-			<div className={`${overview.Function} ${data.isLocal ? `${overview.Function_local}`:''}`}>
-				<FunctionRender data={data}/>
-				
+			editorDiv = (
 				<div
 					className={`${overview.Function_editor} ${overview.Function_editor_hidden}`}
 					onClick={folding}
 				>
 					{this.renderForm()}
 				</div>
+			);
+		}
+
+		return (
+			<div className={`${overview.Function} ${data.isLocal ? `${overview.Function_local}`:''}`}>
+				<FunctionRender data={data}/>
+				{editorDiv}
 			</div>
 		);
 	}

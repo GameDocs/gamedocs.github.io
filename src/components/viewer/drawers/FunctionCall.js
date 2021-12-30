@@ -1,5 +1,4 @@
 import React from 'react';
-import './../Viewer.css';
 import overview from './../Overview.module.scss';
 import { capitalizeName } from './FunctionUtil';
 
@@ -41,7 +40,7 @@ function prettyParams(params, isLocal) {
 function FunctionCall(props) {
 	let data = props.data;
 
-	let callName = ''
+	let callName = '';
 	if(data.isLocal) {
 		callName = '<' + prettyName(data.namespace) + '>:';
 	} else {

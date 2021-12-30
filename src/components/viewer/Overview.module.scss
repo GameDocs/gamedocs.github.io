@@ -1,14 +1,16 @@
 .Function {
-	/*background-color: rgb(139, 108, 62);*/
 	background-color: #463c2d;
+	/*background-color: transparent;*/
 	border-bottom: 4px solid rgb(124, 93, 61);
 	padding: 10px;
 	border-radius: 4px;
-	margin-bottom: 10px;
 	overflow: hidden;
+	margin-top: 10px;
 	margin-right: 10px;
 	color: white;
 	display: flex;
+	/* Test */
+	background: linear-gradient(45deg, rgb(97, 76, 39) 0%, rgb(70, 60, 45) 100%);
 
 	&_content {
 		flex: 1;
@@ -17,26 +19,27 @@
 	}
 	
 	&_editor {
-		transition: flex 0.5s, opacity 0.5s, padding 0.2s;
+		transition: flex 0.5s, opacity 0.5s;
 		background-color: #0003;
 		border-radius: 5px;
 		padding: 5px;
 		margin-left: 10px;
-		flex: 1;
 		max-width: 100%;
 		min-width: 0px;
 		width: 100%;
+		flex: 1;
 		border-left: 10px solid rgb(112, 92, 73);
 
 		&_hidden {
-			transition: flex 0.5s, padding 0.2s;
-			width: 0px;
+			transition: flex 0.5s;
+			width: 0;
 			padding: 0;
 			flex: 0 !important;
 
 			& * {
 				transition: opacity 0.5s;
 				opacity: 0;
+				height: 0px;
 			}
 		}
 	}
@@ -55,6 +58,12 @@
 		font-size: 16px;
 		margin-top: 5px;
 		margin-left: 5px;
+	}
+}
+
+@media (max-width: 768px) {
+	.Function_editor {
+		display: none;
 	}
 }
 
@@ -97,19 +106,25 @@
 
 /* Function call information. Code example */
 .Function_call {
-	background-color: rgb(27, 27, 27);
-	border-bottom: 4px solid rgb(109, 78, 49);
-	border-radius: 5px;
+	background-color: #1b1b1b;
+	/*border-bottom: 4px solid rgb(109, 78, 49);*/
+	border-bottom: 4px solid #3c2d20;
+	/*border-radius: 5px;*/
 	font-size: 14px;
-	padding: 10px 5px 10px 5px;
+	padding: 10px 5px 10px 10px;
 	word-wrap: break-word;
 	white-space: pre-wrap;
+	border-radius: 5px 5px 10px 10px;
 }
 
 /* Function params */
 .Function_params {
-	background-color: #0002;
-	border-radius: 5px;
+	/*border-bottom: 4px solid rgb(109, 78, 49);*/
+	/*background-color: #0002;*/
+	/*border-radius: 5px;*/
+	background-color: #1b1b1b;
+	border-bottom: 4px solid #3c2d20;
+	border-radius: 5px 5px 10px 10px;
 	font-size: 14px;
 	padding: 2px;
 	margin: 0;
@@ -164,6 +179,7 @@
 
 .Function_desc_note, .Function_desc_warning {
 	margin-top: 20px;
+	margin-left: -10px;
 	border-radius: 5px;
 	overflow: hidden;
 
@@ -181,8 +197,10 @@
 
 .Function_desc_note {
 	background-color: #476947;
+	border-bottom: 4px solid #3215;
 }
 
 .Function_desc_warning {
 	background-color: #818a08;
+	border-bottom: 4px solid #3215;
 }

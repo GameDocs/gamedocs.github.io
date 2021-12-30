@@ -1,5 +1,4 @@
 import React from 'react';
-import './../Viewer.css';
 import overview from './../Overview.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
@@ -38,7 +37,7 @@ function FunctionReturns(props) {
 			desc = processMarkdownTags(param.description);
 		}
 
-		elements.push((
+		elements.push(
 			<ul>
 				<li key={`${idx}`}>
 					<span className={`${overview.Function_params_type}`}>
@@ -47,7 +46,7 @@ function FunctionReturns(props) {
 					{desc}
 				</li>
 			</ul>
-		));
+		);
 	}
 
 	return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import './../Viewer.css';
 import overview from './../Overview.module.scss';
 
 import SandboxTag from './SandboxTag';
@@ -17,7 +16,7 @@ function FunctionRender(props) {
 	let data = props.data;
 	let func = data.func;
 
-	let funcName = ''
+	let funcName = '';
 	if(data.isLocal) {
 		funcName = '<' + prettyName(data.namespace) + '>:' + data.name;
 	} else {

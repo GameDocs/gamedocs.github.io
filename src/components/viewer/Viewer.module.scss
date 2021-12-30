@@ -28,3 +28,71 @@
 		user-select: none;
 	}
 }
+
+.TreeViewer {
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.Menu {
+	background-color: #222;
+	padding: 10px;
+	font-size: 18px;
+	display: none;
+}
+
+.Menu_hamburger {
+	content: url('hamburger.svg');
+	fill: #fff;
+	width: 32px;
+	height: 32px;
+	user-select: none;
+}
+
+
+.Summary {
+	transition: left 0.2s;
+	position: fixed;
+	left: -250px;
+	width: 250px;
+	max-width: 250px;
+}
+
+.Summary_show {
+	transition: left 0.2s;
+	left: 0px;
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+@media (max-width: 768px) {
+	.Menu {
+		display: block;
+	}
+
+	.Overview_hide {
+		transition: opacity 0.3s;
+		opacity: 0.3;
+		overflow-y: hidden;
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.Summary_screen_hide {
+		background-color: #0003;
+		position: fixed;
+		top: 0px;
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+@media (min-width: 768px) {
+	.Summary {
+		left: 0px !important;
+	}
+
+	.Summary_screen {
+		left: 0px !important;
+	}
+}

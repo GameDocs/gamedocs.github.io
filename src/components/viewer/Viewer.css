@@ -9,14 +9,15 @@
 
 #summary {
 	background-color: #222;
+	font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 	position: fixed;
-	height: calc(100vh - var(--navbar-height));
 	overflow-x: hidden;
 	overflow-y: scroll;
-	width: 250px;
-	max-width: 250px;
 	scrollbar-width: thin;
-	font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+	width: 250px;
+	z-index: 999;
+	min-width: 250px;
+	height: 100vh;
 }
 
 #overview {
@@ -29,9 +30,11 @@
 	overflow-y: scroll;
 }
 
-#editor {
-	background-color: #222;
-	flex: 1;
+@media (max-width: 768px) {
+	#overview {
+		position: unset;
+		width: 100%;
+	}
 }
 
 #searchBar {
@@ -70,40 +73,37 @@
 	pointer-events: initial;
 }
 
-
-
-.MuiTreeItem-content {
-	user-select: none;
-	background-color: #1d1d1d;
-}
-
-.Mui-expanded > .MuiTreeItem-content {
-	background-color: #072;
-	transition: background-color 0.1s;
-}
-
-.Mui-expanded > .MuiTreeItem-content .MuiTreeItem-label {
-	background-color: #fff3;
-}
-
-.MuiTreeItem-root {
-	background-color: initial;
-}
-
+/* Remove blue outline */
 .MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label {
-	background-color: #fff3 !important;
+	background-color: transparent !important;
 }
 
-.Mui-expanded.MuiTreeItem-root {
+.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover {
+	background-color: transparent !important;
+}
+
+.MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label {
+	background-color: transparent !important;
+}
+
+/* Custom TreeView styles */
+.MuiTreeItem-root {
+	user-select: none;
+}
+
+.MuiCollapse-wrapperInner > .MuiTreeItem-root > .MuiTreeItem-content {
+	transition: background-color 0.6s;
+	padding: 2px 2px 2px 0;
+	border-radius: 20px;
+	margin-bottom: 2px;
+}
+
+.MuiCollapse-wrapperInner > .MuiTreeItem-root > .MuiTreeItem-content > .MuiTreeItem-root:hover {
+	transition: background-color 0.6s;
 	background-color: #333;
 }
 
-.MuiTreeItem-iconContainer {
-	width: 0px;
-}
-
-.MuiTreeItem-group .MuiTreeItem-content {
-	background-color: #222;
-	border-radius: 0;
-	border: none;
+.MuiCollapse-wrapperInner > .Mui-selected > .MuiTreeItem-content {
+	transition: background-color 0.3s;
+	background-color: #444;
 }

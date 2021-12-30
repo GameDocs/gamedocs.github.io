@@ -1,5 +1,4 @@
 import React from 'react';
-import './../Viewer.css';
 import overview from './../Overview.module.scss';
 
 const colors = {

@@ -16,6 +16,7 @@ export function capitalizeTypeName(name) {
 	if(typeof name === 'undefined') {
 		return '';
 	}
+	
 	// Convert name into a string
 	name = `${name}`;
 

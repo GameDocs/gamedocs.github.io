@@ -1,6 +1,5 @@
 import './App.css';
-import { useState } from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import DocsView from './components/docsview/DocsView';
 import Viewer from './components/viewer/Viewer';
 import Navbar from './components/navbar/Navbar';
@@ -18,9 +17,6 @@ function App() {
 			<Switch>
 				<Route path="/test">
 					<Viewer/>
-				</Route>
-				<Route path="/edit">
-					DocsEditor TEST!!!!
 				</Route>
 				<Route>
 					<div className="AppBody">
