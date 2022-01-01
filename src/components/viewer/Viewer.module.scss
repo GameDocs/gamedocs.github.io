@@ -1,0 +1,99 @@
+.Version {
+	text-align: center;
+	background-color: #222;
+	padding: 10px 0 10px 0;
+	user-select: none;
+}
+
+.Content {
+	padding-left: 10px;
+}
+
+.Modal {
+	background-color: #f0f0f0;
+	text-align: center;
+	border-radius: 5px;
+	width: 100px;
+	height: 26px;
+	position: relative;
+	overflow: hidden;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	
+	& a {
+		color: black;
+		margin-top: 5px;
+		font-size: 18px;
+		user-select: none;
+	}
+}
+
+.TreeViewer {
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.Menu {
+	background-color: #222;
+	padding: 10px;
+	font-size: 18px;
+	position: sticky;
+	display: none;
+	top: 0px;
+}
+
+.Menu_hamburger {
+	content: url('hamburger.svg');
+	fill: #fff;
+	width: 32px;
+	height: 32px;
+	user-select: none;
+}
+
+.Summary {
+	transition: left 0.2s;
+	position: fixed;
+	left: -250px;
+	width: 250px;
+	max-width: 250px;
+
+	&.Show {
+		transition: left 0.2s;
+		left: 0px;
+	}
+}
+
+.SummaryDarkScreen {
+	transition: background-color 0.5s;
+	background-color: transparent;
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+
+	&.Show {
+		transition: background-color 0.5s;
+		display: block;
+		z-index: 0;
+		background-color: #0004;
+	}
+}
+
+@media (max-width: 768px) {
+	.Menu {
+		display: block;
+	}
+
+	.OverviewHide {
+		overflow-y: hidden;
+		pointer-events: none;
+		user-select: none;
+	}
+}
+
+@media (min-width: 768px) {
+	.Summary {
+		left: 0px !important;
+	}
+}

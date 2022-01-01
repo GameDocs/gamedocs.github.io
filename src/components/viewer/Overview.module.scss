@@ -1,0 +1,65 @@
+.FunctionEditor {
+	transition: flex 0.5s, opacity 0.5s, min-width 0.5s;
+	background-color: #0003;
+	border-radius: 5px;
+	padding: 5px;
+	margin-left: 10px;
+	max-width: 100%;
+	min-width: 0px;
+	width: 100%;
+	flex: 1;
+	border-left: 10px solid rgb(112, 92, 73);
+
+	&.Hidden {
+		transition: min-width 0.5s;
+		transition: flex 0.5s;
+		width: 0;
+		padding: 0;
+		flex: 0 !important;
+
+		& * {
+			transition: opacity 0.5s;
+			opacity: 0;
+			height: 0px;
+		}
+	}
+
+	&.Show {
+		transition: flex 0.5s, opacity 0.5s, min-width 0.5s;
+		min-width: 250px;
+	}
+}
+
+@media (max-width: 768px) {
+	.FunctionEditor {
+		display: none;
+	}
+}
+
+.Function_desc_note, .Function_desc_warning {
+	margin-top: 20px;
+	margin-left: -10px;
+	border-radius: 5px;
+	overflow: hidden;
+
+	& div {
+		padding: 0 0 5px 5px;
+	}
+
+	&.note_title {
+		background-color: #0003;
+		border-radius: 5px 5px 0 0;
+		padding: 5px;
+		margin: 0;
+	}
+}
+
+.Function_desc_note {
+	background-color: #476947;
+	border-bottom: 4px solid #3215;
+}
+
+.Function_desc_warning {
+	background-color: #818a08;
+	border-bottom: 4px solid #3215;
+}

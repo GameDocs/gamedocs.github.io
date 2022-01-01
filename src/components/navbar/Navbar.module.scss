@@ -1,7 +1,6 @@
-.TopBar {
+.Navbar {
 	background-color: #111;
-	position: -webkit-sticky; /* Safari */
-	position: sticky;
+	position: fixed;
 	width: 100%;
 	left: 0;
 	top: 0;
@@ -9,14 +8,29 @@
 	text-align: left;
 }
 
-/* Phone css */
-$breakpoint-tablet: 768px;
-@media (max-width: $breakpoint-tablet) {
-	body {
-		margin-top: 49px;
-	}
+.Item {
+	background-color: #111;
+	color: #fff;
+	display: inline-block;
+	padding: 14px 20px;
+	user-select: none;
 
-	.TopBar {
-		position: fixed;
+	&:hover {
+		background-color: #333;
+		transition: 0.2s;
+	}
+}
+
+.ActiveItem {
+	background-color: #685;
+	color: #fff;
+	display: inline-block;
+	padding: 14px 20px;
+	user-select: none;
+	text-decoration: none;
+
+	&:hover {
+		background-color: #222;
+		transition: 0s;
 	}
 }

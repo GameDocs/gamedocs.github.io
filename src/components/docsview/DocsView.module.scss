@@ -76,7 +76,7 @@
 $breakpoint-tablet: 768px;
 @media (max-width: $breakpoint-tablet) {
 	body {
-		font-size: 10px;
+		font-size: 2.5vw; 
 	}
 
 	.Horizontal {
@@ -270,6 +270,10 @@ $breakpoint-tablet: 768px;
 		&:hover {
 			color: #ccc;
 		}
+	}
+
+	& p {
+		font-size: 1em;
 	}
 }
 

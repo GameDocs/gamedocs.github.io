@@ -1,4 +1,5 @@
 import React from 'react';
+import './oldstyle.css';
 import styles from './DocsView.module.scss';
 import logo from '../images/logo.png';
 
@@ -142,7 +143,7 @@ function DocsView(props) {
 	});
 
 	return (
-		<div className={`${styles.Vertical}`}>
+		<div id="OldDocsView" className={`${styles.Vertical}`}>
 			<div className={`${styles.Horizontal}`}>
 				<div className={`${styles.DocsCardImage}`}>
 					<img className={`${styles.Logo}`} src={logo} alt="Logo"/>
