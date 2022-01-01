@@ -26,13 +26,12 @@ function FunctionRender(props) {
 	return (
 		<div className={`${functionStyle.Content}`}>
 			<div>
-				<span className={`${functionStyle.Name}`}>
-					{`${funcName}`}
-				</span>
+				<span className={`${functionStyle.Name}`}>{`${funcName}`}</span>
 				<SandboxTag sandbox={`${func.sandbox}`}/>
-				<FunctionCall data={data}/>
+				<div className={`${functionStyle.EditButton}`} onClick={props.onEdit}>Edit</div>
 			</div>
 
+			<FunctionCall data={data}/>
 			<FunctionParams data={data}/>
 			<FunctionDesc desc={func.description}/>
 			<FunctionReturns data={data}/>

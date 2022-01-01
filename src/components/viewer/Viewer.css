@@ -33,10 +33,6 @@ code, pre, pre span {
 	width: 18px;
 }
 
-::-webkit-resizer {
-	display: none;
-}
-
 ::-webkit-scrollbar-corner {
 	display: none;
 }
@@ -64,14 +60,13 @@ code, pre, pre span {
 	position: fixed;
 	width: calc(100% - 250px);
 	left: 250px;
-	overflow-y: scroll;
 	height: 100%;
-	padding-bottom: 10px;
+	overflow-y: scroll;
 }
 
 @media (max-width: 768px) {
 	#overview {
-		position: unset;
+		left: 0;
 		width: 100%;
 	}
 }

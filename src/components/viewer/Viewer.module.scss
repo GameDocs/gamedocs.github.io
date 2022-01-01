@@ -75,7 +75,7 @@
 	&.Show {
 		transition: background-color 0.5s;
 		display: block;
-		z-index: 0;
+		z-index: 1;
 		background-color: #0004;
 	}
 }
@@ -83,12 +83,6 @@
 @media (max-width: 768px) {
 	.Menu {
 		display: block;
-	}
-
-	.OverviewHide {
-		overflow-y: hidden;
-		pointer-events: none;
-		user-select: none;
 	}
 }
 

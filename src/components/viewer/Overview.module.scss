@@ -8,13 +8,14 @@
 	min-width: 0px;
 	width: 100%;
 	flex: 1;
-	border-left: 10px solid rgb(112, 92, 73);
+	/*border-left: 10px solid rgb(112, 92, 73);*/
 
 	&.Hidden {
 		transition: min-width 0.5s;
 		transition: flex 0.5s;
 		width: 0;
 		padding: 0;
+		margin: 0;
 		flex: 0 !important;
 
 		& * {
@@ -26,7 +27,6 @@
 
 	&.Show {
 		transition: flex 0.5s, opacity 0.5s, min-width 0.5s;
-		min-width: 250px;
 	}
 }
 

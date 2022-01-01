@@ -98,8 +98,10 @@ function DisplayOverviewFiltered(filter) {
 	);
 }
 
-// TODO: When the menu hamburger is visible make it possible to exit the menu by clicking outside the namespace list
 // TODO: Maybe tint function boxes depending on the sandbox
+// TODO: Add hyperlink elements to all functions
+// TODO: Fix all unique key lists. This will probably make some elements have the correct size in the future.
+
 
 function Viewer(props) {
 	React.useEffect(() => {

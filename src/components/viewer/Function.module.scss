@@ -6,6 +6,7 @@
 	overflow: hidden;
 	margin-top: 10px;
 	margin-right: 10px;
+	margin-bottom: 10px;
 	color: white;
 	display: flex;
 	/* Test */
@@ -29,6 +30,7 @@
 	margin: 0;
 	*/
 	max-width: 100%;
+	padding-right: 0;
 }
 
 /* Sandbox should be different depending on context */
@@ -56,8 +58,6 @@
 
 /* Function call information. Code example */
 .Call {
-	/*border-bottom: 4px solid rgb(109, 78, 49);*/
-	/*border-radius: 5px;*/
 	background-color: #1b1b1b;
 	border-bottom: 4px solid #3c2d20;
 	font-size: 14px;
@@ -73,12 +73,11 @@
 
 .ContentAnimation {
 	transition: max-width 0.5s;
+	max-width: 100%;
 	flex: 1;
-	max-width: calc(100% - 20px);
 
 	&.Editor {
-		transition: max-width 0.5s;
-		max-width: calc(50% - 20px);
+		max-width: 50%;
 	}
 }
 
@@ -89,9 +88,6 @@
 }
 
 .Params {
-	/*border-bottom: 4px solid rgb(109, 78, 49);*/
-	/*background-color: #0002;*/
-	/*border-radius: 5px;*/
 	background-color: #1b1b1b;
 	border-bottom: 4px solid #3c2d20;
 	border-radius: 5px 5px 10px 10px;
@@ -123,6 +119,8 @@
 
 .ParamType {
 	font-style: italic;
+	word-break: break-word;
+
 	&::before {
 		content: ' <';
 		color: #f70;
@@ -148,13 +146,45 @@
 		color: rgb(247, 212, 54);
 	}
 
-	& code {
-		background-color: #0003;
-		padding: 2px 4px 2px 4px;
-		border-radius: 4px;
+	& p {
+		margin: 10px 0;
 	}
 
-	& p {
-		margin: 10px 0 10px 0;
+	& code {
+		background-color: #0003;
+		padding: 2px 4px;
+		border-radius: 4px;
+	}
+}
+
+/* Editor styles */
+.EditButton {
+	transition: background-color 0.3s, opacity 0.2s;
+	background-color: #1b1b1b;
+	border-bottom: 4px solid #3c2d20;
+	border-radius: 5px 5px 10px 10px;
+	padding: 2px 12px;
+	float: right;
+	user-select: none;
+	cursor: pointer;
+	opacity: 0.2;
+
+	&:hover {
+		background-color: #520;
+	}
+
+	&:active {
+		background-color: #740;
+	}
+}
+
+.Function:hover .EditButton {
+	transition: background-color 0.3s, opacity 0.2s;
+	opacity: 1;
+}
+
+@media (max-width: 768px) {
+	.EditButton {
+		display: none;
 	}
 }

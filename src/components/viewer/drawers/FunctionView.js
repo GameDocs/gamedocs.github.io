@@ -170,9 +170,7 @@ class FunctionView extends React.Component {
 					render={renderComp}
 					update={update}
 				/>
-				<div>
-					<div className={`${editor.Param_button}`} onClick={this.onAddParam}>Add Parameter</div>
-				</div>
+				<div className={`${editor.Param_button}`} onClick={this.onAddParam}>Add Parameter</div>
 			</div>
 		);
 	}
@@ -222,9 +220,7 @@ class FunctionView extends React.Component {
 					render={renderComp}
 					update={update}
 				/>
-				<div>
-					<div className={`${editor.Param_button}`} onClick={this.onAddReturnParam}>Add Return</div>
-				</div>
+				<div className={`${editor.Param_button}`} onClick={this.onAddReturnParam}>Add Return</div>
 			</div>
 		);
 	}
@@ -303,11 +299,13 @@ class FunctionView extends React.Component {
 		return (
 			<div className={`${functionStyle.Function} ${data.isLocal ? functionStyle.LocalFunction:''}`}>
 				<div className={`${functionStyle.ContentAnimation} ${menu ? functionStyle.Editor:''}`}>
-					<FunctionRender data={data}/>
+					<FunctionRender
+						data={data}
+						onEdit={folding}
+					/>
 				</div>
 				<div
 					className={`${overview.FunctionEditor} ${menu ? overview.Show:overview.Hidden}`}
-					onClick={folding}
 				>
 					{menu ? this.renderForm():null}
 				</div>
