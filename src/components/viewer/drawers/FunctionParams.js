@@ -2,10 +2,6 @@ import React from 'react';
 import functionStyle from './../Function.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
-function getParamName(param, idx) {
-	return `${param.name || ('param ' + idx)}`;
-}
-
 function getParamType(types) {
 	if(types.length === 1) {
 		return capitalizeTypeName(types);
@@ -32,40 +28,28 @@ function FunctionParams(props) {
 		return null;
 	}
 
-	let elements = [];
-	
-	for(let idx in params) {
-		if(isLocal && idx < 1) {
-			// We do not show the first parameter of a local function
-			continue;
-		}
-
-		let param = params[idx];
-		let desc = '';
-
-		if(typeof param.description !== 'undefined') {
-			desc = processMarkdownTags(param.description);
-		}
-
-		elements.push(
-			<ul>
-				<li key={`${idx}`}>
-					<span className={`${functionStyle.ParamName}`}>
-						{getParamName(param, idx)}
-					</span>
-					<span className={`${functionStyle.ParamType}`}>
-						{getParamType(param.type)}
-					</span>
-					{desc}
-				</li>
-			</ul>
-		);
-	}
-
 	return (
 		<div className={`${functionStyle.Params}`}>
 			<span className={`${functionStyle.ParamLabel}`}>Params:</span>
-			{elements}
+			<ul>
+				{params.map((param, idx) => {
+					if(isLocal && idx < 1) {
+						return;
+					}
+					
+					return (
+						<li key={`${idx}`}>
+							<span className={`${functionStyle.ParamName}`}>
+								{`${param.name || ('param ' + idx)}`}
+							</span>
+							<span className={`${functionStyle.ParamType}`}>
+								{getParamType(param.type)}
+							</span>
+							{typeof param.description !== 'undefined' ? processMarkdownTags(param.description):null}
+						</li>
+					);
+				})}
+			</ul>
 		</div>
 	);
 }

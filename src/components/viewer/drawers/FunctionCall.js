@@ -39,6 +39,7 @@ function prettyParams(params, isLocal) {
 
 function FunctionCall(props) {
 	let data = props.data;
+	let func = data.func;
 
 	let callName = '';
 	if(data.isLocal) {
@@ -50,7 +51,7 @@ function FunctionCall(props) {
 	
 	return (
 		<pre className={`${functionStyle.Call}`}>
-			{callName}<span className={`${functionStyle.CallName}`}>{data.name}</span>({callParams})
+			{callName}<span className={`${functionStyle.CallName}`}>{func.name}</span>({callParams})
 		</pre>
 	);
 }

@@ -37,6 +37,26 @@ function StringifyParam(param, allowName = true) {
 	);
 }
 
+function StringifyUserListParam(params) {
+	if(Object.keys(params).length === 0) return '';
+
+	let result = [];
+	let items = Object.keys(params);
+	for(let i = 1; i < items.length; i++) {
+		let param = params[items[i]];
+
+		if(param.name) {
+			result.push(param.name);
+		} else if(param.type.length === 1) {
+			result.push(param.type[0]);
+		} else {
+			result.push('[' + param.type + '] ');
+		}
+	}
+
+	return result.join(', ');
+}
+
 const MARKDOWN_LINK_TARGET = (href, children, title) => {
 	return href.startsWith('#') ? '':'_blank';
 };
@@ -77,12 +97,16 @@ function DeclParameters(json) {
 function DocsFunc(namespace_name, function_name, json, local) {
 	let local_id = namespace_name + (local ? ':':'.') + function_name;
 	let link_id = local_id.toLowerCase();
+
+	let ns_name = namespace_name.substr(namespace_name.lastIndexOf('.') + 1);
+	let fn_name = local ? ('<' + ns_name.substr(0, 1).toUpperCase() + ns_name.substr(1) + '>:' + function_name):local_id;
+
 	return (
 		<div id={link_id} style={{ "display": "none" }} className={`${styles.DeclFunction}`}><br/><br/>
 			<dl>
 				<dt className={`${styles.DeclHeader} ${local ? styles.Userdata:styles.Tabledata}`}>
 					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclSandbox}`}>{json.sandbox}</code></span>
-					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclName}`}>{local_id}</code></span>
+					<span className={`${styles.DeclSeparator}`}><code className={`${styles.DeclName}`}>{fn_name}</code></span>
 					<span className={`${styles.DeclSeparator}`}><span className={`${styles.DeclParameters}`}>{DeclParameters(json.params)}</span></span>
 					<CopyToClipboard text={window.location.href.replace(new RegExp(window.location.hash, 'g'), '') + '#' + link_id} onCopy={() => {
 						window.location.hash = '#'
@@ -92,6 +116,15 @@ function DocsFunc(namespace_name, function_name, json, local) {
 				<dd>
 					<p className={`${styles.DeclDescription}`}>
 						<ReactMarkdown linkTarget={MARKDOWN_LINK_TARGET}>{json.description}</ReactMarkdown>
+
+						{local ? from_func(() => {
+							return (
+								<div>
+									<p>Example Usage:</p>
+									<pre>variable_{ns_name}:{function_name}({StringifyUserListParam(json.params)});</pre>
+								</div>
+							);
+						}):''}
 					</p>
 					<table className={`${styles.DeclTables}`}>
 						<tbody>

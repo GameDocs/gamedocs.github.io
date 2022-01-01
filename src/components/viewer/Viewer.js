@@ -10,37 +10,22 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import FunctionView from './drawers/FunctionView';
-import DocsJson from '../data/api.0.5.1_658.json';
+import { updateJsonFormatLatest } from './converters/FormatConverter';
+import DocsJson_data from '../data/api.0.5.1_658.json';
+const DocsJson = updateJsonFormatLatest(DocsJson_data);
 
-function TestTree() {
-	let list = [];
+function DisplayOverview(idx) {
+	let namespace = DocsJson.content[idx];
 
-	let json = DocsJson.content;
-	
-	let json_keys = Object.keys(json);
-	for(let i in json_keys) {
-		let name = json_keys[i];
-		// let cont = json[json_keys[i]];
-
-		list.push(<TreeItem nodeId={`${name}`} label={`${name}`} />);
-	}
-
-	return list;
-}
-
-function DisplayOverview(namespace) {
 	let list = [];
 	{
-		let json = DocsJson.content[namespace].tabledata;
+		let json = namespace.tabledata;
 		let json_keys = Object.keys(json);
-		for(let i in json_keys) {
-			let name = json_keys[i];
-			let func = json[name];
+		for(let name of json_keys) {
 			let data = {
-				namespace: namespace,
+				namespace: namespace.name,
 				isLocal: false,
-				name: name,
-				func: func
+				func: json[name]
 			};
 			
 			list.push(<FunctionView data={data}/>);
@@ -48,16 +33,13 @@ function DisplayOverview(namespace) {
 	}
 
 	{
-		let json = DocsJson.content[namespace].userdata;
+		let json = namespace.userdata;
 		let json_keys = Object.keys(json);
-		for(let i in json_keys) {
-			let name = json_keys[i];
-			let func = json[name];
+		for(let name of json_keys) {
 			let data = {
-				namespace: namespace,
+				namespace: namespace.name,
 				isLocal: true,
-				name: name,
-				func: func
+				func: json[name]
 			};
 			
 			list.push(<FunctionView data={data}/>);
@@ -71,6 +53,53 @@ function DisplayOverview(namespace) {
 		document.getElementById('overview-content')
 	);
 }
+
+function DisplayOverviewFiltered(filter) {
+	let list = [];
+	for(let namespace of DocsJson.content) {
+		if(namespace.name.indexOf(filter) !== -1) {
+			{
+				let json = namespace.tabledata;
+				let json_keys = Object.keys(json);
+				for(let name of json_keys) {
+					let data = {
+						namespace: namespace.name,
+						isLocal: false,
+						id: `${namespace.name}_${name}_false`,
+						func: json[name]
+					};
+					
+					list.push(<FunctionView data={data}/>);
+				}
+			}
+		
+			{
+				let json = namespace.userdata;
+				let json_keys = Object.keys(json);
+				for(let name of json_keys) {
+					let data = {
+						namespace: namespace.name,
+						isLocal: true,
+						id: `${namespace.name}_${name}_true`,
+						func: json[name]
+					};
+					
+					list.push(<FunctionView data={data}/>);
+				}
+			}
+		}
+	}
+
+	ReactDOM.render(
+		<div>
+			{list}
+		</div>,
+		document.getElementById('overview-content')
+	);
+}
+
+// TODO: When the menu hamburger is visible make it possible to exit the menu by clicking outside the namespace list
+// TODO: Maybe tint function boxes depending on the sandbox
 
 function Viewer(props) {
 	React.useEffect(() => {
@@ -115,11 +144,9 @@ function Viewer(props) {
 	
 	const [ menu, setMenu ] = React.useState(false);
 
-
-	const updateTreeViewer = (search) => {
-		console.log('Filter again');
-
-		let list = document.querySelectorAll('.MuiTreeItem-group .MuiTreeItem-label');
+	const updateTreeViewer = () => {
+		let search = document.getElementById('searchBar').value;
+		let list = document.querySelectorAll('.MuiCollapse-wrapperInner .MuiTreeItem-root');
 		for(let i = 0; i < list.length; i++) {
 			let elm = list[i];
 
@@ -131,7 +158,31 @@ function Viewer(props) {
 				elm.style.display = '';
 			}
 		}
+
+		/*
+		if(search.trim().length >= 0) {
+			DisplayOverviewFiltered(search);
+		}
+		*/
 	};
+
+	const createTreeList = () => {
+		let search = document.getElementById('searchBar')?.value || '';
+
+		let list = [];
+		let json = DocsJson.content;
+		
+		let json_keys = Object.keys(json);
+		for(let key of json_keys) {
+			let name = json[key].name;
+
+			if(name.indexOf(search) !== -1) {
+				list.push(<TreeItem key={`${key}`} nodeId={`${key}`} label={`${name}`} />);
+			}
+		}
+
+		return list;
+	}
 
 	const handleSelect = (event, nodeId) => {
 		if(!nodeId.startsWith('#root_')) {
@@ -150,7 +201,7 @@ function Viewer(props) {
 				let modal = document.getElementById('save-modal');
 				modal.classList.toggle('save-modal-visible');
 
-				let data = JSON.stringify(DocsJson.content, null, 4);
+				let data = JSON.stringify(DocsJson, null, '\t');
 				const jsonBlob = new Blob([data], {type : 'application/json'});
 				
 				let modalLink = document.getElementById('save-modal-href');
@@ -159,11 +210,6 @@ function Viewer(props) {
 		});
 	}, []);
 	
-	const handleHamburger = (event) => {
-		console.log('Hamburger');
-		setMenu(!menu);
-	};
-	
 	return (
 		<div id="viewer">
 			<div id="save-modal" onMouseDown={event => event.target.classList.toggle('save-modal-visible')}>
@@ -171,32 +217,34 @@ function Viewer(props) {
 					<a href="." id="save-modal-href" download={`${'0.5.1_658_edited.json'}`}>Save JSON</a>
 				</div>
 			</div>
-			<div id="summary" className={`${styles.Summary} ${menu ? styles.Summary_show:''}`}>
+			<div className={`${styles.SummaryDarkScreen} ${menu ? styles.Show:''}`} onClick={() => setMenu(false)}/>
+			<div id="summary" className={`${styles.Summary} ${menu ? styles.Show:''}`}>
 				<div>
 					<div className={`${styles.Version}`}>
 						ScrapMechanic {`${version}`} API
 					</div>
-					<input id="searchBar" type="text" placeholder="Search" name="search" onChange={(e) => updateTreeViewer(e.target.value)} />
+					<input id="searchBar" type="text" placeholder="Search" name="search" onChange={updateTreeViewer} />
 				</div>
 				<div className={`${styles.TreeViewer}`}>
 					<TreeView
 						className={`${styles.TreeView}`}
 						defaultCollapseIcon={<ExpandMoreIcon/>}
 						defaultExpandIcon={<ChevronRightIcon/>}
+						onNodeToggle={updateTreeViewer}
 						onNodeSelect={handleSelect}
 					>
-						<TreeItem nodeId="#root_1" label="Functions">
-							{TestTree()}
+						<TreeItem nodeId="#root_1" label="Namespaces">
+							{createTreeList()}
 						</TreeItem>
 					</TreeView>
 				</div>
 			</div>
-			<div id="overview" className={`${menu ? styles.Overview_hide:''}`}>
+			<div id="overview">
 				<Breadcrumbs aria-label="breadcrumb">
 
 				</Breadcrumbs>
 				<div className={`${styles.Menu}`}>
-					<div className={`${styles.Menu_hamburger}`} onClick={handleHamburger}>
+					<div className={`${styles.Menu_hamburger}`} onClick={() => setMenu(true)}>
 						Hamburger
 					</div>
 				</div>

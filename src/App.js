@@ -15,7 +15,7 @@ function App() {
 			</Navbar>*/}
 
 			<Switch>
-				<Route path="/test">
+				<Route path="/neweditor">
 					<Viewer/>
 				</Route>
 				<Route>

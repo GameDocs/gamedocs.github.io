@@ -43,7 +43,7 @@ export function capitalizeTypeName(name) {
 	return name.substring(0, 1).toUpperCase() + name.substring(1);
 }
 
-export function applyMarkdown(text) {
+function applyMarkdown(text) {
 	return (
 		<ReactMarkdown>{text}</ReactMarkdown>
 	);
@@ -77,6 +77,8 @@ export function processMarkdownTags(text) {
 	}
 
 	return (
-		<div>{elements}</div>
+		<div>
+			{elements}
+		</div>
 	);
 }

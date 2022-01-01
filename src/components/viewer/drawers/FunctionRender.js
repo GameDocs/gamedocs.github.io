@@ -18,9 +18,9 @@ function FunctionRender(props) {
 
 	let funcName = '';
 	if(data.isLocal) {
-		funcName = '<' + prettyName(data.namespace) + '>:' + data.name;
+		funcName = '<' + prettyName(data.namespace) + '>:' + func.name;
 	} else {
-		funcName = data.name;
+		funcName = func.name;
 	}
 	
 	return (

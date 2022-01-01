@@ -13,17 +13,21 @@ const colors = {
 const translation = {
 	serverMethod: 'Server',
 	clientMethod: 'Client',
-	removedMethod: 'Removed'
+	removedMethod: 'Removed',
+
+	defaultName: 'Undefined'
 };
 
 function SandboxTag(props) {
-	if(!props.sandbox || props.sandbox === 'undefined') return null;
+	if(!props.sandbox || props.sandbox === 'undefined') {
+		return null;
+	}
 
 	let sandboxColor = colors[props.sandbox] || colors.defaultColor;
 
 	return (
 		<span className={`${functionStyle.Sandbox}`} style={{color: `${sandboxColor}`}}>
-			{`${translation[props.sandbox]}`}
+			{`${translation[props.sandbox] || translation.defaultName}`}
 		</span>
 	);
 }

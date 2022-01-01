@@ -1,5 +1,5 @@
-.Function_editor {
-	transition: flex 0.5s, opacity 0.5s;
+.FunctionEditor {
+	transition: flex 0.5s, opacity 0.5s, min-width 0.5s;
 	background-color: #0003;
 	border-radius: 5px;
 	padding: 5px;
@@ -10,7 +10,8 @@
 	flex: 1;
 	border-left: 10px solid rgb(112, 92, 73);
 
-	&_hidden {
+	&.Hidden {
+		transition: min-width 0.5s;
 		transition: flex 0.5s;
 		width: 0;
 		padding: 0;
@@ -22,10 +23,15 @@
 			height: 0px;
 		}
 	}
+
+	&.Show {
+		transition: flex 0.5s, opacity 0.5s, min-width 0.5s;
+		min-width: 250px;
+	}
 }
 
 @media (max-width: 768px) {
-	.Function_editor {
+	.FunctionEditor {
 		display: none;
 	}
 }

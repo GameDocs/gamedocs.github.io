@@ -3,14 +3,13 @@ import functionStyle from './../Function.module.scss';
 import { processMarkdownTags } from './FunctionUtil';
 
 function FunctionDesc(props) {
-	let desc = props.desc;
-	if(typeof desc === 'undefined') {
+	if(typeof props.desc === 'undefined') {
 		return null;
 	}
 
 	return (
 		<div className={`${functionStyle.Description}`}>
-			{processMarkdownTags(desc)}
+			{processMarkdownTags(props.desc)}
 		</div>
 	);
 }

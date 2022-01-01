@@ -24,32 +24,19 @@ function FunctionReturns(props) {
 		return null;
 	}
 
-	let elements = [];
-	
-	for(let idx in returns) {
-		let param = returns[idx];
-		let desc = '';
-
-		if(typeof param.description !== 'undefined') {
-			desc = processMarkdownTags(param.description);
-		}
-
-		elements.push(
-			<ul>
-				<li key={`${idx}`}>
-					<span className={`${functionStyle.ParamType}`}>
-						{getParamType(param.type)}
-					</span>
-					{desc}
-				</li>
-			</ul>
-		);
-	}
-
 	return (
-		<div class={`${functionStyle.Params}`}>
+		<div className={`${functionStyle.Params}`}>
 			<span className={`${functionStyle.ParamLabel}`}>Returns:</span>
-			{elements}
+			<ul>
+				{returns.map((param, idx) => (
+					<li key={`${idx}`}>
+						<span className={`${functionStyle.ParamType}`}>
+							{getParamType(param.type)}
+						</span>
+						{typeof param.description !== 'undefined' ? processMarkdownTags(param.description):null}
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
