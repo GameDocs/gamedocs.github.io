@@ -2,7 +2,7 @@
 This project is both a personal and community project.
 
 ## ScrapMechanic Documentation
-You can find documentation of the game ScrapMechanic here: [Docs](https://gamedocs.github.io/smdocs/)
+You can find documentation of the game ScrapMechanic here: [Docs](https://gamedocs.github.io/)
 
 
 ## Contributing
