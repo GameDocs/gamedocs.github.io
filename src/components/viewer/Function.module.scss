@@ -1,5 +1,7 @@
 .Function {
 	background-color: #463c2d;
+	/* Test */
+	background: linear-gradient(45deg, rgb(97, 76, 39) 0%, rgb(70, 60, 45) 100%);
 	border-bottom: 4px solid rgb(124, 93, 61);
 	padding: 10px;
 	border-radius: 4px;
@@ -9,8 +11,6 @@
 	margin-bottom: 10px;
 	color: white;
 	display: flex;
-	/* Test */
-	background: linear-gradient(45deg, rgb(97, 76, 39) 0%, rgb(70, 60, 45) 100%);
 }
 
 .LocalFunction {
@@ -44,15 +44,31 @@
 	margin-left: 5px;
 }
 
+.NamePragma {
+	transition: width 0.1s;
+	content: url(pragma.svg);
+	width: 16px;
+	height: 16px;
+	padding-right: 5px;
+	margin-bottom: -2px;
+	width: 0px;
+}
+
 .Name {
 	color: white;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	/*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
 	font-size: 20px;
+	cursor: pointer;
 
 	&:hover {
 		border-bottom: 2px solid white;
 		transition: border-radius 0.1s;
 		border-radius: 0px;
+
+		.NamePragma {
+			transition: width 0.1s;
+			width: 16px;
+		}
 	}
 }
 

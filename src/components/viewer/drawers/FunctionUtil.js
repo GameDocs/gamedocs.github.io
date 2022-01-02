@@ -66,13 +66,17 @@ export function processMarkdownTags(text) {
 			let noteMessage = textBlock.substr(breakIdx + 2);
 			
 			elements.push(
-				<div className={`${noteStyle}`}>
+				<div key={`${idx}_md`} className={`${noteStyle}`}>
 					<div className={`${noteStyle} ${overview.note_title}`}>{`${noteType}`}</div>
 					<div>{applyMarkdown(noteMessage)}</div>
 				</div>
 			);
 		} else {
-			elements.push(applyMarkdown(textBlock));
+			elements.push(
+				<div key={`${idx}_md`}>
+					{applyMarkdown(textBlock)}
+				</div>
+			);
 		}
 	}
 

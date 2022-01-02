@@ -12,7 +12,6 @@ function prettyParams(params, isLocal) {
 
 	for(let idx in params) {
 		if(isLocal && idx < 1) {
-			// We do not show the first parameter of a local function
 			continue;
 		}
 
@@ -23,7 +22,7 @@ function prettyParams(params, isLocal) {
 			result += elm.name;
 		} else {
 			if(elm.type.length === 1) {
-				result += elm.type;
+				result += elm.type[0] || 'unknown';
 			} else {
 				result += `[${elm.type}]`;
 			}

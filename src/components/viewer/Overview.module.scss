@@ -4,11 +4,10 @@
 	border-radius: 5px;
 	padding: 5px;
 	margin-left: 10px;
-	max-width: 100%;
+	max-width: calc(50% - 20px);
 	min-width: 0px;
-	width: 100%;
+	width: calc(50% - 20px);
 	flex: 1;
-	/*border-left: 10px solid rgb(112, 92, 73);*/
 
 	&.Hidden {
 		transition: min-width 0.5s;

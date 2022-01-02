@@ -3,11 +3,11 @@ import './Viewer.css';
 import styles from './Viewer.module.scss';
 import ReactDOM from 'react-dom';
 
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import FunctionView from './drawers/FunctionView';
 import { updateJsonFormatLatest } from './converters/FormatConverter';
@@ -21,28 +21,30 @@ function DisplayOverview(idx) {
 	{
 		let json = namespace.tabledata;
 		let json_keys = Object.keys(json);
-		for(let name of json_keys) {
+		for (let kidx in json_keys) {
+			let name = json_keys[kidx];
 			let data = {
 				namespace: namespace.name,
 				isLocal: false,
 				func: json[name]
 			};
 			
-			list.push(<FunctionView data={data}/>);
+			list.push(<FunctionView key={`${idx}_${kidx}_0`} data={data}/>);
 		}
 	}
 
 	{
 		let json = namespace.userdata;
 		let json_keys = Object.keys(json);
-		for(let name of json_keys) {
+		for (let kidx in json_keys) {
+			let name = json_keys[kidx];
 			let data = {
 				namespace: namespace.name,
 				isLocal: true,
 				func: json[name]
 			};
 			
-			list.push(<FunctionView data={data}/>);
+			list.push(<FunctionView key={`${idx}_${kidx}_1`} data={data}/>);
 		}
 	}
 
@@ -56,12 +58,12 @@ function DisplayOverview(idx) {
 
 function DisplayOverviewFiltered(filter) {
 	let list = [];
-	for(let namespace of DocsJson.content) {
-		if(namespace.name.indexOf(filter) !== -1) {
+	for (let namespace of DocsJson.content) {
+		if (namespace.name.indexOf(filter) !== -1) {
 			{
 				let json = namespace.tabledata;
 				let json_keys = Object.keys(json);
-				for(let name of json_keys) {
+				for (let name of json_keys) {
 					let data = {
 						namespace: namespace.name,
 						isLocal: false,
@@ -76,7 +78,7 @@ function DisplayOverviewFiltered(filter) {
 			{
 				let json = namespace.userdata;
 				let json_keys = Object.keys(json);
-				for(let name of json_keys) {
+				for (let name of json_keys) {
 					let data = {
 						namespace: namespace.name,
 						isLocal: true,
@@ -99,49 +101,50 @@ function DisplayOverviewFiltered(filter) {
 }
 
 // TODO: Maybe tint function boxes depending on the sandbox
-// TODO: Add hyperlink elements to all functions
 // TODO: Fix all unique key lists. This will probably make some elements have the correct size in the future.
 
 
 function Viewer(props) {
 	React.useEffect(() => {
-		/*{
-			let search_list = document.getElementById('class-search-list');
-			let search_elements = Array.prototype.slice.call(search_list.children, 0);
-			search_elements.sort((a, b) => {
-				let as = a.innerText;
-				let bs = b.innerText;
-				return as.localeCompare(bs);
-			});
 
-			// Clear the elements to then feed the sorted elements back into the div
-			search_list.innerHTML = '';
-			for(let i in search_elements) {
-				search_list.appendChild(search_elements[i]);
-			}
-		}
+		if (window.location.hash && window.location.hash.startsWith('#neweditor/')) {
+			let hash = window.location.hash.substring('#neweditor/'.length);
 
-		if(window.location.hash) {
-			let hash = window.location.hash.substring(1);
 			let namespace;
-			{
+			let objname;
+			let isLocal;
+			if (hash.indexOf(':') != -1) {
 				let idx = hash.lastIndexOf(':');
-				if(idx >= 0) {
-					namespace = hash.substring(0, idx);
-				} else {
-					idx = hash.lastIndexOf('.');
-					if(idx >= 0) {
-						namespace = hash.substring(0, idx);
-					} else {
-						namespace = hash;
-					}
+				namespace = hash.substring(0, idx);
+				objname = hash.substring(idx + 1);
+				isLocal = true;
+			} else {
+				let idx = hash.lastIndexOf('.');
+				namespace = hash.substring(0, idx);
+				objname = hash.substring(idx + 1);
+				isLocal = false;
+			}
+
+			console.log('namespace: [' + namespace + ']');
+			console.log('object: [' + objname + ']');
+			console.log('local: [' + isLocal + ']');
+
+			// Find the namespace that has this name
+			let json = DocsJson.content;
+		
+			let json_keys = Object.keys(json);
+			for (let key in json_keys) {
+				let name = json[key].name;
+
+				if (name == namespace) {
+					DisplayOverview(key);
+					break;
 				}
 			}
 
-			//filter_elements(namespace, true);
-			window.location.hash = '#';
-			window.location.hash = '#' + hash.toLowerCase();
-		}*/
+			// Scroll to the element with the name 'objname'
+			// TODO:
+		}
 	});
 	
 	const [ menu, setMenu ] = React.useState(false);
@@ -149,41 +152,54 @@ function Viewer(props) {
 	const updateTreeViewer = () => {
 		let search = document.getElementById('searchBar').value;
 		let list = document.querySelectorAll('.MuiCollapse-wrapperInner .MuiTreeItem-root');
-		for(let i = 0; i < list.length; i++) {
-			let elm = list[i];
-
-			let text = elm.innerText;
-			let idx = text.indexOf(search);
-			if(idx === -1) {
-				elm.style.display = 'none';
+		if (search.startsWith(':')) {
+			if (search.substring(1).trim().length > 3) {
+				DisplayOverviewFiltered(search.substring(1).trim());
 			} else {
+				DisplayOverviewFiltered('!');
+			}
+			
+			for (let i = 0; i < list.length; i++) {
+				let elm = list[i];
 				elm.style.display = '';
 			}
+		} else {
+			for (let i = 0; i < list.length; i++) {
+				let elm = list[i];
+	
+				let text = elm.innerText;
+				let idx = text.indexOf(search);
+				if (idx === -1) {
+					elm.style.display = 'none';
+				} else {
+					elm.style.display = '';
+				}
+			}
 		}
-
-		/*
-		if(search.trim().length >= 0) {
-			DisplayOverviewFiltered(search);
-		}
-		*/
 	};
 
 	const createTreeList = () => {
 		let search = document.getElementById('searchBar')?.value || '';
-
-		let list = [];
+		let elements = [];
 		let json = DocsJson.content;
-		
 		let json_keys = Object.keys(json);
-		for(let key of json_keys) {
-			let name = json[key].name;
-
-			if(name.indexOf(search) !== -1) {
-				list.push(<TreeItem key={`${key}`} nodeId={`${key}`} label={`${name}`} />);
+		
+		if (search.startsWith(':')) {
+			for (let key in json_keys) {
+				let name = json[key].name;
+				elements.push(<TreeItem key={`${key}`} nodeId={`${key}`} label={`${name}`} />);
+			}
+		} else {
+			for (let key in json_keys) {
+				let name = json[key].name;
+	
+				if (name.indexOf(search) !== -1) {
+					elements.push(<TreeItem key={`${key}`} nodeId={`${key}`} label={`${name}`} />);
+				}
 			}
 		}
 
-		return list;
+		return elements;
 	}
 
 	const handleSelect = (event, nodeId) => {
@@ -197,7 +213,7 @@ function Viewer(props) {
 
 	React.useEffect(() => {
 		document.body.addEventListener('keydown', (event) => {
-			if((event.ctrlKey || event.metaKey) && event.key === 's') {
+			if ((event.ctrlKey || event.metaKey) && event.key === 's') {
 				event.preventDefault();
 				
 				let modal = document.getElementById('save-modal');

@@ -8,7 +8,7 @@ function getParamType(types) {
 		let type = types[idx];
 
 		if(idx > 0) {
-			elements.push(<span className={`${functionStyle.ParamSeparator}`}/>);
+			elements.push(<span key={`${idx}`} className={`${functionStyle.ParamSeparator}`}/>);
 		}
 
 		elements.push(capitalizeTypeName(type));

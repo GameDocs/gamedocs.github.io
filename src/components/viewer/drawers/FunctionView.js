@@ -6,6 +6,8 @@ import editor from './../Editor.module.scss';
 
 import FunctionRender from './FunctionRender';
 import ReorderableList from './ReorderableList';
+import EditorParam from './editor/EditorParam';
+import EditorReturnParam from './editor/EditorReturnParam';
 import AnimateHeight from 'react-animate-height';
 
 class FunctionView extends React.Component {
@@ -23,11 +25,14 @@ class FunctionView extends React.Component {
 		this.onDescriptionChange = this.onDescriptionChange.bind(this);
 		this.onAddParam = this.onAddParam.bind(this);
 		this.onAddReturnParam = this.onAddReturnParam.bind(this);
+		this.onRemoveParam = this.onRemoveParam.bind(this);
+		this.onRemoveReturnParam = this.onRemoveReturnParam.bind(this);
+		this.refresh = this.refresh.bind(this);
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(props) {
 		this.setState({
-			data: nextProps.data,
+			data: props.data,
 			menu: false,
 			paramFoldout: false,
 			returnFoldout: false
@@ -44,21 +49,6 @@ class FunctionView extends React.Component {
 		this.refresh();
 	}
 
-	onParamNameChange(event, param) {
-		param.name = `${event.target.value}`;
-		this.refresh();
-	}
-
-	onParamTypeChange(event, param) {
-		param.type = `${event.target.value}`.split(',');
-		this.refresh();
-	}
-
-	onParamDescriptionChange(event, param) {
-		param.description = event.target.value;
-		this.refresh();
-	}
-
 	onAddParam() {
 		this.state.data.func.params.push({
 			name: '',
@@ -70,16 +60,6 @@ class FunctionView extends React.Component {
 
 	onRemoveReturnParam(idx) {
 		this.state.data.func.returns.splice(idx, 1);
-		this.refresh();
-	}
-	
-	onReturnTypeChange(event, param) {
-		param.type = `${event.target.value}`.split(',');
-		this.refresh();
-	}
-
-	onReturnDescriptionChange(event, param) {
-		param.description = event.target.value;
 		this.refresh();
 	}
 
@@ -117,58 +97,21 @@ class FunctionView extends React.Component {
 	}
 
 	createParams() {
-		const renderComp = (param, idx) => {
-			return (
-				<div className={`${editor.Param}`}>
-					<div>
-						<div className={`${editor.Param_buttons_remove}`}>
-							<div className={`${editor.Param_button}`} onClick={() => this.onRemoveParam(idx)}>Remove</div>
-						</div>
-					</div>
-					<div>
-						<span className={`${editor.Param_span}`}>Name:</span>
-						<input
-							className={`${editor.Param_text}`}
-							value={`${param.name}`}
-							placeholder={`${param.name || param.type}`}
-							onChange={evt => this.onParamNameChange(evt, param)}
-							spellCheck='false'
-							type='text'
-						/>
-					</div>
-					<div>
-						<span className={`${editor.Param_span}`}>Type:</span>
-						<input
-							className={`${editor.Param_text}`}
-							value={`${param.type}`}
-							onChange={evt => this.onParamTypeChange(evt, param)}
-							spellCheck='false'
-							type='text'
-						/>
-					</div>
-					<div>
-						<span className={`${editor.Param_span}`}>Description:</span>
-						<textarea
-							className={`${editor.Param_textarea}`}
-							value={`${param.description || ''}`}
-							onChange={evt => this.onParamDescriptionChange(evt, param)}
-							spellCheck='false'
-						/>
-					</div>
-				</div>
-			);
-		};
-
-		const update = () => {
-			this.refresh();
-		};
+		const renderComp = (param, idx) => (
+			<EditorParam
+				onRemove={this.onRemoveParam}
+				onEdit={this.refresh}
+				index={idx}
+				param={param}
+			/>
+		);
 
 		return (
 			<div className={`${editor.Param_block}`}>
 				<ReorderableList
 					items={this.state.data.func.params}
 					render={renderComp}
-					update={update}
+					update={this.refresh}
 				/>
 				<div className={`${editor.Param_button}`} onClick={this.onAddParam}>Add Parameter</div>
 			</div>
@@ -176,49 +119,21 @@ class FunctionView extends React.Component {
 	}
 
 	createReturnParams() {
-		const renderComp = (param, idx) => {
-			return (
-				<div className={`${editor.Param}`}>
-					<div>
-						<div className={`${editor.Param_buttons_remove}`}>
-							<div className={`${editor.Param_button}`} onClick={() => this.onRemoveReturnParam(idx)}>Remove</div>
-						</div>
-					</div>
-					<div>
-						<span className={`${editor.Param_span}`}>Type:</span>
-						<input
-							className={`${editor.Param_text}`}
-							value={`${param.type}`}
-							onChange={evt => this.onReturnTypeChange(evt, param)}
-							spellCheck='false'
-							type='text'
-						/>
-					</div>
-					<div>
-						<span className={`${editor.Param_span}`}>Description:</span>
-						<textarea
-							className={`${editor.Param_textarea}`}
-							value={`${param.description || ''}`}
-							onChange={evt => this.onReturnDescriptionChange(evt, param)}
-							spellCheck='false'
-						/>
-					</div>
-				</div>
-			);
-		};
-
-		const update = () => {
-			this.refresh();
-		};
-
-		let returns = this.state.data.func.returns;
-
+		const renderComp = (param, idx) => (
+			<EditorReturnParam
+				onRemove={this.onRemoveReturnParam}
+				onEdit={this.refresh}
+				index={idx}
+				param={param}
+			/>
+		);
+		
 		return (
 			<div className={`${editor.Param_block}`}>
 				<ReorderableList
-					items={returns}
+					items={this.state.data.func.returns}
 					render={renderComp}
-					update={update}
+					update={this.refresh}
 				/>
 				<div className={`${editor.Param_button}`} onClick={this.onAddReturnParam}>Add Return</div>
 			</div>
@@ -295,7 +210,7 @@ class FunctionView extends React.Component {
 				this.setState({data: data, menu: !menu});
 			}
 		};
-		// max-width: calc(100% - 20px);
+
 		return (
 			<div className={`${functionStyle.Function} ${data.isLocal ? functionStyle.LocalFunction:''}`}>
 				<div className={`${functionStyle.ContentAnimation} ${menu ? functionStyle.Editor:''}`}>
@@ -304,9 +219,7 @@ class FunctionView extends React.Component {
 						onEdit={folding}
 					/>
 				</div>
-				<div
-					className={`${overview.FunctionEditor} ${menu ? overview.Show:overview.Hidden}`}
-				>
+				<div className={`${overview.FunctionEditor} ${menu ? overview.Show:overview.Hidden}`}>
 					{menu ? this.renderForm():null}
 				</div>
 			</div>

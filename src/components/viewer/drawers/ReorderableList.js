@@ -18,13 +18,22 @@ class ReorderableList extends Component {
 		this.onDragEnd = this.onDragEnd.bind(this);
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {
+	static getDerivedStateFromProps(props) {
+		return {
+			items: props.items,
+			render: props.render,
+			update: props.update
+		};
+	}
+	/*
+	UNSAFE_componentWillReceiveProps(props) {
 		this.setState({
-			items: nextProps.items,
-			render: nextProps.render,
-			update: nextProps.update
+			items: props.items,
+			render: props.render,
+			update: props.update
 		});
 	}
+	*/
 
 	onDragEnd(result) {
 		// Dropped outside the list

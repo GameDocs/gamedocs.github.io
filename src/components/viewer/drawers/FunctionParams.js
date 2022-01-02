@@ -3,16 +3,12 @@ import functionStyle from './../Function.module.scss';
 import { capitalizeTypeName, processMarkdownTags } from './FunctionUtil';
 
 function getParamType(types) {
-	if(types.length === 1) {
-		return capitalizeTypeName(types);
-	}
-
 	let elements = [];
 	for(let idx in types) {
 		let type = types[idx];
 
 		if(idx > 0) {
-			elements.push(<span className={`${functionStyle.ParamSeparator}`}/>);
+			elements.push(<span key={`${idx}`} className={`${functionStyle.ParamSeparator}`}/>);
 		}
 		elements.push(capitalizeTypeName(type));
 	}
@@ -34,7 +30,7 @@ function FunctionParams(props) {
 			<ul>
 				{params.map((param, idx) => {
 					if(isLocal && idx < 1) {
-						return;
+						return null;
 					}
 					
 					return (

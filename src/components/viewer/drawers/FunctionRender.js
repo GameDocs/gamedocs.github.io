@@ -1,5 +1,6 @@
 import React from 'react';
 import functionStyle from './../Function.module.scss';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import SandboxTag from './SandboxTag';
 import FunctionCall from './FunctionCall';
@@ -26,7 +27,14 @@ function FunctionRender(props) {
 	return (
 		<div className={`${functionStyle.Content}`}>
 			<div>
-				<span className={`${functionStyle.Name}`}>{`${funcName}`}</span>
+				<CopyToClipboard
+					text={window.location.href.replace(new RegExp(window.location.hash, 'g'), '') + '#neweditor/' + data.namespace + (data.isLocal ? ':' : '.') + data.func.name}
+					onCopy={() => {
+						window.location.hash = '#neweditor/';
+						window.location.hash = '#neweditor/' + (data.namespace + (data.isLocal ? ':' : '.') + data.func.name);
+					}}>
+					<span className={`${functionStyle.Name}`}><span className={`${functionStyle.NamePragma}`}/>{`${funcName}`}</span>
+				</CopyToClipboard>
 				<SandboxTag sandbox={`${func.sandbox}`}/>
 				<div className={`${functionStyle.EditButton}`} onClick={props.onEdit}>Edit</div>
 			</div>

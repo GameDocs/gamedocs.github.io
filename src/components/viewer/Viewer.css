@@ -108,15 +108,7 @@ code, pre, pre span {
 }
 
 /* Remove blue outline */
-.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label {
-	background-color: transparent !important;
-}
-
-.MuiTreeItem-root.Mui-selected > .MuiTreeItem-content .MuiTreeItem-label:hover {
-	background-color: transparent !important;
-}
-
-.MuiTreeItem-root.Mui-selected:focus > .MuiTreeItem-content .MuiTreeItem-label {
+.MuiTreeItem-content {
 	background-color: transparent !important;
 }
 
@@ -125,19 +117,14 @@ code, pre, pre span {
 	user-select: none;
 }
 
-.MuiCollapse-wrapperInner > .MuiTreeItem-root > .MuiTreeItem-content {
+.MuiCollapse-wrapperInner .MuiTreeItem-content {
 	transition: background-color 0.6s;
 	padding: 2px 2px 2px 0;
 	border-radius: 20px;
 	margin-bottom: 2px;
 }
 
-.MuiCollapse-wrapperInner > .MuiTreeItem-root > .MuiTreeItem-content > .MuiTreeItem-root:hover {
-	transition: background-color 0.6s;
-	background-color: #333;
-}
-
-.MuiCollapse-wrapperInner > .Mui-selected > .MuiTreeItem-content {
+.MuiCollapse-wrapperInner .MuiTreeItem-content.Mui-selected {
 	transition: background-color 0.3s;
-	background-color: #444;
+	background-color: #444 !important;
 }

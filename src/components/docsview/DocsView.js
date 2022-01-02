@@ -10,10 +10,6 @@ function class_list_search(elm) {
 
 }
 
-function Namespace(json) {
-	
-}
-
 function JsonMap(json, func) {
 	let result = [];
 	let json_keys = Object.keys(json);
@@ -150,10 +146,10 @@ function DocsView(props) {
 				</div>
 				<div className={`${styles.DocsCardText}`}>
 					<p>I'm currently working on making this project more community driven.<br/>
-						<a class="pagelink" href="https://github.com/GameDocs/gamedocs.github.io" target="blank">[GitHub Repository]</a>
+						<a className="pagelink" href="https://github.com/GameDocs/gamedocs.github.io" target="blank">[GitHub Repository]</a>
 					</p>
 					<p>Special thanks to TechnologicNick for helping me with documentation.<br/>
-						<a class="pagelink" href="https://github.com/TechnologicNick" target="blank">[GitHub TechnologicNick]</a>
+						<a className="pagelink" href="https://github.com/TechnologicNick" target="blank">[GitHub TechnologicNick]</a>
 					</p>
 				</div>
 			</div>
@@ -165,34 +161,27 @@ function DocsView(props) {
 					<ul id="class-search-list" className={`${styles.ClassSearchList}`}>
 						{JsonMap(DocsContent, (namespace_name, json) => {
 							if(Object.keys(json.tabledata).length === 0
-							&& Object.keys(json.userdata).length === 0
-							/* Object.keys(json.constants).length === 0 */) {
+							&& Object.keys(json.userdata).length === 0) {
 								return '';
 							}
 
 							return (
-								<li onClick={() => filter_elements(namespace_name, true)}>{namespace_name}</li>
+								<li key={`${namespace_name}`} onClick={() => filter_elements(namespace_name, true)}>{namespace_name}</li>
 							);
 						})}
 					</ul>
 				</div>
 				<div id="class-element-list" className={`${styles.DocsCard}`}>
-					{/* TABLEDATA */}
 					{JsonMap(DocsContent, (namespace_name, value) => {
 						return JsonMap(value.tabledata, (function_name, value) => {
 							return DocsFunc(namespace_name, function_name, value, false);
 						});
 					})}
-
-					{/* USERDATA */}
 					{JsonMap(DocsContent, (namespace_name, value) => {
 						return JsonMap(value.userdata, (function_name, value) => {
 							return DocsFunc(namespace_name, function_name, value, true);
 						});
 					})}
-
-					{/* CONSTANTS */}
-					{/*<div id="constants">{JsonMap(DocsContent, (key, value) => DocsFunc(key, value, false))}</div>*/}
 				</div>
 			</div>
 		</div>
